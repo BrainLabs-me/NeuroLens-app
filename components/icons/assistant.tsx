@@ -13,12 +13,10 @@ function AssistantIcon(props: { opacity?: number }) {
       {...props}
     >
       <Path
-        d="M16.42 7.95a6.253 6.253 0 010 8.84 6.253 6.253 0 01-8.84 0 6.253 6.253 0 010-8.84 6.253 6.253 0 018.84 0zM8.25 21.64c-2-.8-3.75-2.25-4.91-4.26a9.89 9.89 0 01-1.25-6.25M5.85 4.48A9.936 9.936 0 0112 2.36c2.27 0 4.36.77 6.04 2.05M15.75 21.64c2-.8 3.75-2.25 4.91-4.26a9.89 9.89 0 001.25-6.25"
+        d="M15.59 12.26a5.13 5.13 0 100-10.26 5.13 5.13 0 000 10.26zM6.36 19.44a3.08 3.08 0 100-6.16 3.08 3.08 0 000 6.16zM16.62 22a2.56 2.56 0 100-5.12 2.56 2.56 0 000 5.12z"
         stroke="#fff"
-        strokeOpacity={props.opacity === undefined ? 0.5 : props.opacity}
         strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeMiterlimit={10}
       />
     </Svg>
   );
