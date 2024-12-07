@@ -14,7 +14,7 @@ export default function Page() {
           top: 0,
         }}
       ></Image>
-      <SafeAreaView className="flex-1 gap-5 p-[20px]"></SafeAreaView>
+      <SafeAreaView className="flex-1 "></SafeAreaView>
     </>
   );
 }
