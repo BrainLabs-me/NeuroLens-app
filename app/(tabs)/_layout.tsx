@@ -3,6 +3,9 @@ import React from "react";
 import { Platform } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import HomeIcon from "@/components/icons/home";
+import AssistantIcon from "@/components/icons/assistant";
+import ProfileIcon from "@/components/icons/profile";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -25,12 +28,27 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
+          tabBarIcon: ({ focused, color, size }) => (
+            <HomeIcon opacity={focused ? 1 : 0.5} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="assistant/index"
         options={{
-          title: "Explore",
+          title: "Assistant",
+          tabBarIcon: ({ focused, color, size }) => (
+            <AssistantIcon opacity={focused ? 1 : 0.5} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile/index"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ focused, color, size }) => (
+            <ProfileIcon opacity={focused ? 1 : 0.5} />
+          ),
         }}
       />
     </Tabs>

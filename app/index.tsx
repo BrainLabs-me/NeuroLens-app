@@ -4,7 +4,9 @@ import { Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Sms } from "iconsax-react-native";
 import H1, { P } from "@/components/ui/text";
+import { useRouter } from "expo-router";
 export default function IndexPage() {
+  const router = useRouter();
   return (
     <SafeAreaView className="flex-1 bg-[#05051E]  relative gap-7  pt-12">
       <Image
@@ -43,7 +45,9 @@ export default function IndexPage() {
             </Text>
           </TouchableOpacity>
         </View>
-        <Button>Start without account</Button>
+        <Button onPress={() => router.push("/(tabs)")}>
+          Start without account
+        </Button>
       </View>
       <Text
         className="text-white text-center font-bold"
