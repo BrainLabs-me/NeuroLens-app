@@ -7,9 +7,10 @@ module.exports = {
       colors: {
         primary: "#6747ED",
         secondary: "",
-        background: "#151718",
-        border: "",
-        card: "#282A2C",
+        "text-secondary": "rgba(255,255,255,0.4)",
+        background: "#05051E",
+        border: "rgba(255,255,255,0.1)",
+        card: "rgba(255,255,255,0.1)",
       },
     },
   },

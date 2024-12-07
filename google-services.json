@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "991263436583",
+    "project_id": "neurolens-444013",
+    "storage_bucket": "neurolens-444013.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991263436583:android:063c09f17807a478d94302",
+        "android_client_info": {
+          "package_name": "com.brainlabs.neurolens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991263436583-9rmmej43h3jg9bcdbsr5jc832kogn6aj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brainlabs.neurolens",
+            "certificate_hash": "256919ddf00cb8174d73844b6fd87339ee90d5ce"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ1K6td4BQOGwUzfDZy-DZIvCPqHGWPfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
