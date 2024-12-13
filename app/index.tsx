@@ -12,6 +12,7 @@ export default function IndexPage() {
     clientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
     redirectUri: "com.brainlabs.neurolens://",
   });
+
   useEffect(() => {
     console.log(response);
   }, [response]);
@@ -65,7 +66,9 @@ export default function IndexPage() {
               </Text>
             </TouchableOpacity>
           </View>
-          <Button>Start without account</Button>
+          <Button onPress={() => router.push("/(tabs)/assistant")}>
+            Start without account
+          </Button>
         </View>
         <Text
           className="text-white text-center font-bold"
