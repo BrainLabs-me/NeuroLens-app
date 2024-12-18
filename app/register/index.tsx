@@ -7,6 +7,8 @@ import * as Google from "expo-auth-session/providers/google";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import React from "react";
+
 export default function IndexPage() {
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,

@@ -1,6 +1,7 @@
 import Input from "@/components/ui/input";
 import { Image, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import React from "react";
 
 export default function Page() {
   return (

@@ -4,11 +4,14 @@ import { View } from "react-native";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import TabBar from "@/components/navigation/tab-bar";
 import { Chart, Home, MusicPlay, Profile } from "iconsax-react-native";
+import NavBar from "@/components/navigation/nav-bar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   return (
     <>
+      <NavBar></NavBar>
       <Tabs
         tabBar={(props) => <TabBar {...props}></TabBar>}
         screenOptions={{
