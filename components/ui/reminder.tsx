@@ -56,6 +56,7 @@ const Reminder = ({ add = false, title, description, time }: Props) => {
                 backgroundColor: "transparent",
                 justifyContent: "center",
                 alignItems: "center",
+                overflow: "hidden", // Hides content outside the circle boundary
               }}
             >
               {/* Menu or Close Button inside the circle */}
