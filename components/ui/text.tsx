@@ -9,6 +9,7 @@ interface TextType extends TextProps {
   weight?: FontWeight;
   children: React.ReactNode;
   className?: string;
+  lineHeight?: number;
 }
 
 const fonts = {
@@ -21,7 +22,7 @@ export default function H1(props: TextType) {
   const font = fonts[props.weight || "regular"].font;
   return (
     <RnText
-      style={{ fontFamily: font, lineHeight: 30 }}
+      style={{ fontFamily: font, lineHeight: props.lineHeight || 35 }}
       className={cn("text-white text-[30px] text-center pt-5", props.className)}
     >
       {props.children}
@@ -33,7 +34,7 @@ export function P(props: TextType) {
   const font = fonts[props.weight || "regular"].font;
   return (
     <RnText
-      style={{ fontFamily: font, lineHeight: 35 }}
+      style={{ fontFamily: font, lineHeight: props.lineHeight || 35 }}
       className="text-[rgba(255,255,255,0.5)] text-[14px] text-center"
     >
       {props.children}
