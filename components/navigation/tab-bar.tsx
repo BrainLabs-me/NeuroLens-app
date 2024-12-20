@@ -5,8 +5,6 @@ import { BlurView } from "expo-blur";
 import Svg, { Mask, Path } from "react-native-svg";
 import Nav from "@/assets/svg/nav";
 import { Bubble, Home } from "iconsax-react-native";
-import { RouteProp } from "@react-navigation/native";
-import { RouteNode } from "expo-router/build/Route";
 export default function TabBar({
   state,
   navigation,
@@ -18,7 +16,7 @@ export default function TabBar({
 }) {
   return (
     <>
-      <View className="absolute bottom-1  w-full   z-20">
+      <View className="absolute bottom-8 w-full z-20">
         <View className="w-full scale-105 justify-center items-center">
           <View className="absolute z-40">
             <Nav></Nav>
@@ -26,7 +24,7 @@ export default function TabBar({
           <MaskedView
             style={styles.maskedView}
             maskElement={
-              <View style={styles.mask}>
+              <View className="flex-1 justify-center items-center bg-transparent">
                 <Svg width={299} height={62} viewBox="0 0 299 62" fill="none">
                   <Mask id="a" fill="#fff">
                     <Path
@@ -54,6 +52,7 @@ export default function TabBar({
             <View style={styles.backgroundContainer}>
               <BlurView
                 tint="light"
+                //  experimentalBlurMethod="dimezisBlurView"
                 style={styles.blurContainer}
                 intensity={30}
               ></BlurView>
@@ -63,12 +62,13 @@ export default function TabBar({
             {state.routes.map((route: any, index: number) => {
               const { options } = descriptors[route.key];
               const isFocused = state.index === index;
+              console.log(options);
               console.log(route);
               if (index === 2) {
                 return (
                   <TouchableOpacity
                     key={index}
-                    className="bg-primary border-border border rounded-full translate-y-[-45px] p-4"
+                    className="bg-primary shadow-gray-50 shadow-sm border-border border rounded-full translate-y-[-47px] p-4"
                   >
                     <Bubble color="white" size={32}></Bubble>
                   </TouchableOpacity>
@@ -86,7 +86,6 @@ export default function TabBar({
                       color: "white",
                       focused: isFocused,
                     })}
-                    {/* <Home key={index} color="white" size={26}></Home> */}
                   </TouchableOpacity>
                 );
               }
@@ -119,14 +118,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   blurContainer: {
-    padding: 40,
-    margin: 16,
-    textAlign: "center",
-    justifyContent: "center",
+    height: 65,
     overflow: "hidden",
-  },
-  image: {
-    flex: 1,
-    resizeMode: "cover",
   },
 });

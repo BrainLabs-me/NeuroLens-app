@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "NeuroLens-app",
-    "slug": "NeuroLens-app",
+    "name": "NeuroLens",
+    "slug": "NeuroLens",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo.png",
     "scheme": "brainlabs.neurolens",
     "extra": {
       "googleAuthRedirect": "com.brainlabs.neurolens://"
@@ -17,9 +17,14 @@
     "android": {
       "package": "com.brainlabs.neurolens",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/images/logo.png",
+        "backgroundColor": "#05051E"
+      },
+      "permissions": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -34,7 +39,7 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#05051E"
         }
       ],
       [
@@ -43,6 +48,14 @@
           "fonts": [
             "node_modules/@expo-google-fonts/poppins/Poppins_400Regular.ttf"
           ]
+        }
+      ],
+      [
+        "react-native-ble-plx",
+        {
+          "isBackgroundEnabled": true,
+          "modes": ["peripheral", "central"],
+          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
         }
       ]
     ],

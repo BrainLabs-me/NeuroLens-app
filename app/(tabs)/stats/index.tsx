@@ -13,7 +13,7 @@ export default function HomeScreen() {
         }}
       ></Image>
       <View className="flex-1  bg-transparent items-center justify-center z-50">
-        <Text className="text-white">Aaaa</Text>
+        <Text className="text-white">Stats</Text>
       </View>
     </>
   );

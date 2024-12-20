@@ -23,12 +23,14 @@ export default function IndexPage() {
         source={require("@/assets/images/bg.png")}
         style={{ width: "100%", height: "100%", position: "absolute", top: 0 }}
       ></Image>
-      <SafeAreaView className="flex-1 relative gap-7  pt-12">
-        <Image
-          source={require("@/assets/images/banner.png")}
-          style={{ flex: 1, width: "100%", objectFit: "contain" }}
-        ></Image>
-
+      <SafeAreaView className="flex-1 justify-center items-center relative gap-7  pt-12">
+        <View className="w-full aspect-square justify-center items-center rounded-3xl">
+          <Image
+            source={require("@/assets/images/woman.png")}
+            className="rotate-2"
+            style={{ flex: 1, width: "100%", objectFit: "contain" }}
+          ></Image>
+        </View>
         <View className="px-5 gap-3">
           <View>
             <H1>Relax and achieve {"\n"} greater peace of mind</H1>
@@ -36,6 +38,7 @@ export default function IndexPage() {
           </View>
           <View className="flex flex-row gap-3">
             <TouchableOpacity
+              style={{ alignContent: "center", alignItems: "center" }}
               onPress={() => {
                 promptAsync();
               }}
@@ -46,7 +49,10 @@ export default function IndexPage() {
                 className="w-7 h-7"
               ></Image>
               <Text
-                style={{ fontFamily: "Poppins_500Medium" }}
+                style={{
+                  fontFamily: "Poppins_500Medium",
+                  includeFontPadding: false,
+                }}
                 className="text-white text-center text-[16px]"
               >
                 Google
@@ -59,7 +65,10 @@ export default function IndexPage() {
               <Sms size="30" color="#fff" />
 
               <Text
-                style={{ fontFamily: "Poppins_500Medium" }}
+                style={{
+                  fontFamily: "Poppins_500Medium",
+                  includeFontPadding: false,
+                }}
                 className="text-white text-center text-[16px]"
               >
                 Email
@@ -71,7 +80,7 @@ export default function IndexPage() {
           </Button>
         </View>
         <Text
-          className="text-white text-center font-bold"
+          className="text-white text-center font-bold pb-5"
           style={{ fontFamily: "Poppins_500Medium" }}
         >
           Don’t have an account?{" "}

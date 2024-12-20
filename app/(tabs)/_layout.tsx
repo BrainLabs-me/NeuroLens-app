@@ -27,7 +27,7 @@ export default function TabLayout() {
         />
 
         <Tabs.Screen
-          name="assistant/index"
+          name="device/index"
           options={{
             title: "Assistant",
             tabBarIcon: ({ focused }) => (
@@ -37,7 +37,7 @@ export default function TabLayout() {
         />
 
         <Tabs.Screen
-          name="example/index"
+          name="assistant/index"
           options={{
             title: "Example",
             tabBarIcon: ({ focused }) => (
@@ -46,7 +46,7 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="example2/index"
+          name="stats/index"
           options={{
             title: "Example",
             tabBarIcon: ({ focused }) => (
@@ -66,7 +66,7 @@ export default function TabLayout() {
       </Tabs>
 
       <View className="absolute bottom-0 translate-y-[55px] px-[20px] w-full">
-        <View className=" h-32 bg-primary rounded-[40px] w-full "></View>
+        <View className=" h-32 bg-primary rounded-[40px] w-full rotate-2"></View>
       </View>
     </>
   );
