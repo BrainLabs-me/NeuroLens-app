@@ -1,97 +1,87 @@
-import React, { useState } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-//import useBLE from "@/hooks/useBle";
-//import DeviceModal from "@/components/DeviceConnectionModal";
+import React from "react";
+import { View, StyleSheet, ImageBackground, Text } from "react-native";
+import { Surface } from "gl-react-expo";
+import { Node, Shaders, GLSL } from "gl-react";
 
-const App = () => {
-  // const {
-  //   allDevices,
-  //   connectedDevice,
-  //   connectToDevice,
-  //   color,
-  //   requestPermissions,
-  //   scanForPeripherals,
-  // } = useBLE();
-  // const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-
-  // const scanForDevices = async () => {
-  //   const isPermissionsEnabled = await requestPermissions();
-  //   if (isPermissionsEnabled) {
-  //     scanForPeripherals();
-  //   }
-  // };
-
-  // const hideModal = () => {
-  //   setIsModalVisible(false);
-  // };
-
-  // const openModal = async () => {
-  //   scanForDevices();
-  //   setIsModalVisible(true);
-  // };
-
+export default function App() {
   return (
-    <SafeAreaView className="flex-1">
-      {/* <View style={styles.heartRateTitleWrapper}>
-        {connectedDevice ? (
-          <>
-            <Text style={styles.heartRateTitleText}>Connected</Text>
-          </>
-        ) : (
-          <Text style={styles.heartRateTitleText}>
-            Please connect the Arduino
-          </Text>
-        )}
-      </View>
-      <TouchableOpacity onPress={openModal} style={styles.ctaButton}>
-        <Text style={styles.ctaButtonText}>Connect</Text>
-      </TouchableOpacity>
-      <DeviceModal
-        closeModal={hideModal}
-        visible={isModalVisible}
-        connectToPeripheral={connectToDevice}
-        devices={allDevices}
-      /> */}
-    </SafeAreaView>
+    <View style={styles.container}>
+      {/* Pozadinska slika */}
+      <ImageBackground
+        source={{ uri: "https://source.unsplash.com/random" }}
+        style={StyleSheet.absoluteFillObject}
+        resizeMode="cover"
+      >
+        {/* Površina za shader */}
+        <Surface style={StyleSheet.absoluteFillObject}>
+          <Blur intensity={5.0}>
+            <ImageBackground
+              source={{ uri: "https://source.unsplash.com/random" }}
+              style={StyleSheet.absoluteFillObject}
+              resizeMode="cover"
+            />
+          </Blur>
+        </Surface>
+
+        {/* Tekst ispred zamagljene pozadine */}
+        <View style={styles.content}>
+          <Text style={styles.text}>Ovo je tekst ispred blura!</Text>
+        </View>
+      </ImageBackground>
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f2f2",
-    paddingBottom: 250,
-  },
-  heartRateTitleWrapper: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  heartRateTitleText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginHorizontal: 20,
-    color: "black",
-  },
-  heartRateText: {
-    fontSize: 25,
-    marginTop: 15,
-  },
-  ctaButton: {
-    backgroundColor: "#FF6060",
+  content: {
     justifyContent: "center",
     alignItems: "center",
-    height: 50,
-    marginHorizontal: 20,
-    marginBottom: 5,
-    borderRadius: 8,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    padding: 20,
+    borderRadius: 10,
   },
-  ctaButtonText: {
-    fontSize: 18,
-    fontWeight: "bold",
+  text: {
     color: "white",
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
 
-export default App;
+// Definišemo shader
+const shaders = Shaders.create({
+  blur: {
+    frag: GLSL`
+      precision highp float;
+      varying vec2 uv;
+      uniform sampler2D t;
+      uniform float intensity;
+
+      void main() {
+        vec4 color = vec4(0.0);
+        float total = 0.0;
+
+        // Definišemo veličinu blur-a
+        float offset = 1.0 / 100.0;
+
+        // Petlja za uzorkovanje piksela oko trenutne pozicije
+        for (float x = -4.0; x <= 4.0; x++) {
+          for (float y = -4.0; y <= 4.0; y++) {
+            float weight = exp(-(x*x + y*y) / 8.0);
+            color += texture2D(t, uv + vec2(x * offset, y * offset)) * weight;
+            total += weight;
+          }
+        }
+        gl_FragColor = color / total;
+      }
+    `,
+  },
+});
+
+const Blur = ({ children, intensity = 1.0 }) => (
+  <Node shader={shaders.blur} uniforms={{ t: children, intensity }} />
+);

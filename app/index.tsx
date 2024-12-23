@@ -5,17 +5,13 @@ import { Sms } from "iconsax-react-native";
 import H1, { P } from "@/components/ui/text";
 import * as Google from "expo-auth-session/providers/google";
 import { router } from "expo-router";
-import { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import React from "react";
 export default function IndexPage() {
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
     redirectUri: "com.brainlabs.neurolens://",
   });
-
-  useEffect(() => {
-    console.log(response);
-  }, [response]);
 
   return (
     <>
