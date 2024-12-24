@@ -30,9 +30,9 @@ export default function TabLayout() {
         />
 
         <Tabs.Screen
-          name="assistant/index"
+          name="headset/index"
           options={{
-            title: "Assistant",
+            title: "Headset",
             tabBarIcon: ({ focused }) => (
               <MusicPlay color={focused ? "white" : "rgba(255,255,255,0.4)"} />
             ),
@@ -40,18 +40,18 @@ export default function TabLayout() {
         />
 
         <Tabs.Screen
-          name="example/index"
+          name="assistant/index"
           options={{
-            title: "Example",
+            title: "Assistant",
             tabBarIcon: ({ focused }) => (
               <Chart color={focused ? "white" : "rgba(255,255,255,0.4)"} />
             ),
           }}
         />
         <Tabs.Screen
-          name="example2/index"
+          name="statistics/index"
           options={{
-            title: "Example",
+            title: "Statistics",
             tabBarIcon: ({ focused }) => (
               <Chart color={focused ? "white" : "rgba(255,255,255,0.4)"} />
             ),

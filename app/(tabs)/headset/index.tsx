@@ -1,6 +1,5 @@
-import React from "react";
 import { View, Text, Image } from "react-native";
-
+import React from "react";
 export default function HomeScreen() {
   return (
     <>
@@ -13,8 +12,8 @@ export default function HomeScreen() {
           top: 0,
         }}
       ></Image>
-      <View className="flex-1  bg-transparent items-center justify-center z-50">
-        <Text className="text-white">Aaaa</Text>
+      <View className="flex-1 bg-transparent items-center justify-center z-50">
+        <Text className="text-white">Aasdadaaa</Text>
       </View>
     </>
   );
