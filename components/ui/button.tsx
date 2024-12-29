@@ -7,6 +7,7 @@ type ButtonType = {
   type?: "primary" | "secondary";
   children: ReactNode;
   className?: string;
+  icon?: ReactNode;
 };
 export default function Button(props: ButtonType) {
   const styles = {
@@ -18,9 +19,10 @@ export default function Button(props: ButtonType) {
       className={cn(styles[props.type || "primary"], props.className)}
       onPress={props.onPress}
     >
+      {props.icon}
       <Text
         style={{ fontFamily: "Poppins_500Medium" }}
-        className="text-white text-center text-[16px]"
+        className="text-white text-center items-center text-[16px]"
       >
         {props.children}
       </Text>

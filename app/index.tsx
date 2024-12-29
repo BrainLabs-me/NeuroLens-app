@@ -8,14 +8,31 @@ import { router } from "expo-router";
 import { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
+import axios from "axios";
 export default function IndexPage() {
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
     redirectUri: "com.brainlabs.neurolens://",
   });
 
+  async function googleLogin(id: string) {
+    try {
+      const res = await axios.post(
+        process.env.EXPO_PUBLIC_API_URL + "/google/login",
+        {
+          id_token: id,
+        }
+      );
+      console.log(res.data);
+      router.push("/(tabs)");
+    } catch {
+      console.log("err");
+    }
+  }
+
   useEffect(() => {
-    console.log(response);
+    //@ts-ignore
+    googleLogin(response?.authentication.idToken);
   }, [response]);
 
   return (

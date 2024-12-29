@@ -33,8 +33,11 @@ export function P(props: TextType) {
   const font = fonts[props.weight || "regular"].font;
   return (
     <RnText
-      style={{ fontFamily: font, lineHeight: 35 }}
-      className="text-[rgba(255,255,255,0.5)] text-[14px] text-center"
+      style={{ fontFamily: font }}
+      className={cn(
+        "text-[rgba(255,255,255,0.5)] text-[14px] text-center",
+        props.className
+      )}
     >
       {props.children}
     </RnText>
