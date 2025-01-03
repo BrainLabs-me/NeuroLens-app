@@ -29,11 +29,25 @@ export default function Page() {
   const [password, setPassword] = useState(""); // Track password
   const [confirmPassword, setConfirmPassword] = useState(""); // Track confirm password
 
-  // Validation states
-  const [isValidLength, setIsValidLength] = useState(false);
-  const [hasNumber, setHasNumber] = useState(false);
-  const [hasUppercase, setHasUppercase] = useState(false);
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  // Password validation criteria
+  const validations = [
+    {
+      label: "At least 8 characters",
+      isValid: password.length >= 8,
+    },
+    {
+      label: "At least 1 number",
+      isValid: /\d/.test(password),
+    },
+    {
+      label: "At least 1 uppercase letter",
+      isValid: /[A-Z]/.test(password),
+    },
+    {
+      label: "Passwords match",
+      isValid: password === confirmPassword,
+    },
+  ];
 
   // Toggle visibility function with proper typing
   const toggleVisibility = (field: keyof PasswordVisibility) => {
@@ -41,20 +55,6 @@ export default function Page() {
       ...prevState,
       [field]: !prevState[field], // Toggle visibility of the given field
     }));
-  };
-
-  // Password validation function
-  const validatePassword = (value: string) => {
-    setPassword(value);
-    setIsValidLength(value.length >= 8);
-    setHasNumber(/\d/.test(value));
-    setHasUppercase(/[A-Z]/.test(value));
-  };
-
-  // Handle confirm password validation
-  const validateConfirmPassword = (value: string) => {
-    setConfirmPassword(value);
-    setPasswordsMatch(value === password);
   };
 
   return (
@@ -102,7 +102,7 @@ export default function Page() {
                   flex: 1, // Allow the input to expand to fill available space
                 }}
                 value={password} // Controlled input
-                onChangeText={validatePassword} // Validate password input
+                onChangeText={setPassword} // Update password input
                 className="w-[90%]"
               />
               <TouchableOpacity
@@ -138,7 +138,7 @@ export default function Page() {
                   flex: 1, // Allow the input to expand to fill available space
                 }}
                 value={confirmPassword} // Controlled input
-                onChangeText={validateConfirmPassword} // Validate confirm password input
+                onChangeText={setConfirmPassword} // Update confirm password input
                 className="w-[90%]"
               />
               <TouchableOpacity
@@ -156,70 +156,30 @@ export default function Page() {
 
         {/* Password Validation */}
         <View className="flex flex-col gap-3 mt-8">
-          <View className="flex flex-row gap-2 items-center justify-start">
-            {isValidLength ? (
-              <TickCircle size={24} color="green" />
-            ) : (
-              <CloseCircle size={24} color="red" />
-            )}
-            <Text
-              style={{
-                color: isValidLength ? "green" : "red",
-                fontSize: 16,
-              }}
+          {validations.map(({ label, isValid }, index) => (
+            <View
+              key={index}
+              className="flex flex-row gap-2 items-center justify-start"
             >
-              At least 8 characters
-            </Text>
-          </View>
-          <View className="flex flex-row gap-2 items-center justify-start">
-            {hasNumber ? (
-              <TickCircle size={24} color="green" />
-            ) : (
-              <CloseCircle size={24} color="red" />
-            )}
-            <Text
-              style={{
-                color: hasNumber ? "green" : "red",
-                fontSize: 16,
-              }}
-            >
-              At least 1 number
-            </Text>
-          </View>
-          <View className="flex flex-row gap-2 items-center justify-start">
-            {hasUppercase ? (
-              <TickCircle size={24} color="green" />
-            ) : (
-              <CloseCircle size={24} color="red" />
-            )}
-            <Text
-              style={{
-                color: hasUppercase ? "green" : "red",
-                fontSize: 16,
-              }}
-            >
-              At least 1 uppercase letter
-            </Text>
-          </View>
-          <View className="flex flex-row gap-2 items-center justify-start">
-            {passwordsMatch ? (
-              <TickCircle size={24} color="green" />
-            ) : (
-              <CloseCircle size={24} color="red" />
-            )}
-            <Text
-              style={{
-                color: passwordsMatch ? "green" : "red",
-                fontSize: 16,
-              }}
-            >
-              Passwords match
-            </Text>
-          </View>
+              {isValid ? (
+                <TickCircle size={24} color="green" />
+              ) : (
+                <CloseCircle size={24} color="red" />
+              )}
+              <Text
+                style={{
+                  color: isValid ? "green" : "red",
+                  fontSize: 16,
+                }}
+              >
+                {label}
+              </Text>
+            </View>
+          ))}
         </View>
       </SafeAreaView>
       <Button className="py-4 absolute bottom-4 left-4 right-4 z-30">
-        Send Code
+        Reset password
       </Button>
     </>
   );
