@@ -6,6 +6,7 @@ import { Text } from "react-native";
 import H1, { P } from "@/components/ui/text";
 import { Lock, PasswordCheck } from "iconsax-react-native";
 import Button from "@/components/ui/button";
+import { router } from "expo-router";
 
 export default function Page() {
   return (
@@ -65,18 +66,34 @@ export default function Page() {
           </Button>
         </View>
       </SafeAreaView>
-      <Text
-        className="text-white text-center font-bold absolute bottom-10"
-        style={{ fontFamily: "Poppins_500Medium" }}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "baseline", // Ensures all text aligns at the baseline
+          position: "absolute",
+          bottom: 30, // Adjusted to move it slightly up from the bottom
+          width: "100%",
+        }}
       >
-        Don’t have an account?{" "}
         <Text
-          className="text-primary"
-          style={{ fontFamily: "Poppins_700Bold" }}
+          className="text-white font-bold"
+          style={{ fontFamily: "Poppins_500Medium", fontSize: 16 }}
         >
-          Register
+          Don’t have an account?{" "}
         </Text>
-      </Text>
+        <TouchableOpacity onPress={() => router.push("/register")}>
+          <Text
+            className="text-primary"
+            style={{
+              fontFamily: "Poppins_700Bold",
+              fontSize: 16, // Match font size with the above text
+            }}
+          >
+            Register
+          </Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 }

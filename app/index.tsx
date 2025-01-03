@@ -71,18 +71,32 @@ export default function IndexPage() {
             Start without account
           </Button>
         </View>
-        <Text
-          className="text-white text-center font-bold"
-          style={{ fontFamily: "Poppins_500Medium" }}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "baseline",
+            marginTop: 20, // Add some spacing above the footer
+          }}
         >
-          Don’t have an account?{" "}
           <Text
-            className="text-primary"
-            style={{ fontFamily: "Poppins_700Bold" }}
+            className="text-white font-bold"
+            style={{ fontFamily: "Poppins_500Medium", fontSize: 16 }}
           >
-            Register
+            Don’t have an account?{" "}
           </Text>
-        </Text>
+          <TouchableOpacity onPress={() => router.push("/register")}>
+            <Text
+              className="text-primary"
+              style={{
+                fontFamily: "Poppins_700Bold",
+                fontSize: 16,
+              }}
+            >
+              Register
+            </Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </>
   );
