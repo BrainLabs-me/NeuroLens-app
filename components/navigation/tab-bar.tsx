@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { BlurView } from "expo-blur";
 import Svg, { Mask, Path } from "react-native-svg";
 import Nav from "@/assets/svg/nav";
 import { Bubble, Home } from "iconsax-react-native";
+import { router } from "expo-router";
 export default function TabBar({
   state,
   navigation,
@@ -14,6 +15,20 @@ export default function TabBar({
   navigation: any;
   descriptors: any;
 }) {
+  const [routes, setRoutes] = useState(state.routes);
+  useEffect(() => {
+    setRoutes(() => {
+      const newRoutes = [...state.routes];
+      const newObject = {
+        key: "new-abc123",
+        name: "new",
+        params: undefined,
+        options: "",
+      }; // Novi objekat
+      newRoutes.splice(2, 0, newObject); // Ubacujemo na indeks 2
+      return newRoutes; // Vraćamo ažurirani niz
+    });
+  }, [state.routes]);
   return (
     <>
       <View className="absolute bottom-8 w-full z-20">
@@ -52,21 +67,18 @@ export default function TabBar({
             <View style={styles.backgroundContainer}>
               <BlurView
                 tint="light"
-                //  experimentalBlurMethod="dimezisBlurView"
+                experimentalBlurMethod="none"
                 style={styles.blurContainer}
-                intensity={30}
+                intensity={20}
               ></BlurView>
             </View>
           </MaskedView>
           <View className="absolute z-40  flex-row justify-between items-center w-full px-[60px]">
-            {state.routes.map((route: any, index: number) => {
-              const { options } = descriptors[route.key];
-              const isFocused = state.index === index;
-              console.log(options);
-              console.log(route);
+            {routes.map((route: any, index: number) => {
               if (index === 2) {
                 return (
                   <TouchableOpacity
+                    onPress={() => router.push("/assistant")}
                     key={index}
                     className="bg-primary shadow-gray-50 shadow-sm border-border border rounded-full translate-y-[-47px] p-4"
                   >
@@ -74,6 +86,11 @@ export default function TabBar({
                   </TouchableOpacity>
                 );
               } else {
+                const { options } = descriptors[route.key];
+                let isFocused = state.index === index;
+                if (index > 2) {
+                  isFocused = state.index === index - 1;
+                }
                 return (
                   <TouchableOpacity
                     key={index}

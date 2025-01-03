@@ -1,5 +1,5 @@
 /* eslint-disable no-bitwise */
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PermissionsAndroid, Platform } from "react-native";
 
 import * as ExpoDevice from "expo-device";
@@ -21,7 +21,8 @@ function useBLE() {
   const [allDevices, setAllDevices] = useState<Device[]>([]);
   const [connectedDevice, setConnectedDevice] = useState<Device | null>(null);
   const [color, setColor] = useState("white");
-
+  const [state, setState] = useState<string>();
+  const [scanning, setScanning] = useState<boolean>(false);
   const requestAndroid31Permissions = async () => {
     const bluetoothScanPermission = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
@@ -77,7 +78,6 @@ function useBLE() {
       return true;
     }
   };
-
   const connectToDevice = async (device: Device) => {
     try {
       const deviceConnection = await bleManager.connectToDevice(device.id);
@@ -88,6 +88,8 @@ function useBLE() {
       startStreamingData(deviceConnection);
     } catch (e) {
       console.log("FAILED TO CONNECT", e);
+    } finally {
+      console.log("CONNECTED");
     }
   };
 
@@ -96,20 +98,28 @@ function useBLE() {
 
   const scanForPeripherals = () =>
     bleManager.startDeviceScan(null, null, (error, device) => {
+      setScanning(true);
+
       if (error) {
         console.log(error);
       }
       if (device) {
-        console.log(device?.id);
         setAllDevices((prevState: Device[]) => {
-          if (!isDuplicteDevice(prevState, device)) {
+          if (
+            !isDuplicteDevice(prevState, device) &&
+            device.name === "Neurolense EEG"
+          ) {
+            console.log(device);
             return [...prevState, device];
           }
           return prevState;
         });
       }
     });
-
+  setTimeout(async () => {
+    await bleManager.stopDeviceScan();
+    setScanning(false);
+  }, 15000);
   const onDataUpdate = (
     error: BleError | null,
     characteristic: Characteristic | null
@@ -120,20 +130,10 @@ function useBLE() {
     } else if (!characteristic?.value) {
       console.log("No Data was received");
       return;
+    } else {
+      console.log(characteristic.value);
+      return;
     }
-
-    const colorCode = base64.decode(characteristic.value);
-
-    let color = "white";
-    if (colorCode === "B") {
-      color = "blue";
-    } else if (colorCode === "R") {
-      color = "red";
-    } else if (colorCode === "G") {
-      color = "green";
-    }
-
-    setColor(color);
   };
 
   const startStreamingData = async (device: Device) => {
@@ -147,12 +147,37 @@ function useBLE() {
       console.log("No Device Connected");
     }
   };
+  async function getConnected() {
+    console.log(await bleManager.connectedDevices([]));
+    console.log(await bleManager.state());
+  }
+  async function getState() {
+    try {
+      const state = await bleManager.state();
+      setState(state);
+    } catch {
+      console.log("err");
+    } finally {
+    }
+  }
+  useEffect(() => {
+    bleManager.onStateChange((state) => {
+      setState(state);
+    }, true);
+    getConnected();
+    getState();
+    requestPermissions();
+    scanForPeripherals();
+  }, []);
 
   return {
+    scanning,
+    getConnected,
     connectToDevice,
     allDevices,
     connectedDevice,
     color,
+    state,
     requestPermissions,
     scanForPeripherals,
     startStreamingData,

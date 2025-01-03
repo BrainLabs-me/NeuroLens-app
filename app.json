@@ -4,27 +4,37 @@
     "slug": "NeuroLens",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/icon.png",
     "scheme": "brainlabs.neurolens",
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "url": "https://app.neurolens.me/updates"
+    },
     "extra": {
       "googleAuthRedirect": "com.brainlabs.neurolens://"
     },
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "backgroundColor": "#05051E",
+        "image": "./assets/images/splash-icon.png",
+        "resizeMode": "contain"
+      }
     },
     "android": {
       "package": "com.brainlabs.neurolens",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo.png",
-        "backgroundColor": "#05051E"
+      "splash": {
+        "backgroundColor": "#05051E",
+        "image": "./assets/images/splash-icon.png",
+        "resizeMode": "contain"
       },
-      "permissions": [
-        "android.permission.BLUETOOTH",
-        "android.permission.BLUETOOTH_ADMIN",
-        "android.permission.BLUETOOTH_CONNECT"
-      ]
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/splash-icon.png",
+        "backgroundColor": "#05051E"
+      }
     },
     "web": {
       "bundler": "metro",
@@ -32,16 +42,22 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
+      ["@config-plugins/react-native-webrtc"],
       [
-        "expo-splash-screen",
+        "expo-secure-store",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#05051E"
+          "configureAndroidBackup": true,
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
         }
       ],
+      "expo-router",
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+        }
+      ],
+      ["expo-splash-screen"],
       [
         "expo-font",
         {
@@ -50,14 +66,8 @@
           ]
         }
       ],
-      [
-        "react-native-ble-plx",
-        {
-          "isBackgroundEnabled": true,
-          "modes": ["peripheral", "central"],
-          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
-        }
-      ]
+      "expo-secure-store",
+      "expo-audio"
     ],
     "experiments": {
       "typedRoutes": true

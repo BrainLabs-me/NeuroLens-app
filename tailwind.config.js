@@ -12,7 +12,7 @@ module.exports = {
         primary: "#6747ED",
         secondary: "",
         "text-secondary": "rgba(255,255,255,0.4)",
-        background: "#05051E",
+        background: "#00000F",
         border: "rgba(255,255,255,0.1)",
         card: "rgba(255,255,255,0.1)",
       },

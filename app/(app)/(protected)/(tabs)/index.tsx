@@ -1,0 +1,107 @@
+import Gravatar from "@/components/ui/gravatar";
+import React, { useRef, useEffect, useState } from "react";
+import { StyleSheet, Touchable, TouchableOpacity, View } from "react-native";
+import Svg, { Path } from "react-native-svg";
+import { Image } from "expo-image";
+import * as d3 from "d3-shape";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import H1, { P } from "@/components/ui/text";
+import Card from "@/components/ui/card";
+import BrainIcon from "@/assets/svg/brain";
+import { Link, router } from "expo-router";
+import DeviceCard, { NoDeviceCard } from "@/components/device/device_card";
+import Constants from "expo-constants";
+
+export default function App() {
+  const data = [10, 30, 50, 20, 80, 40, 20, 80, 40, 60];
+  const width = 350;
+  const height = 130;
+
+  const lineGenerator = d3
+    .line()
+    .x((d, i) => (i / (data.length - 1)) * width)
+    .y((d) => height - (d / 100) * height)
+    .curve(d3.curveCatmullRom);
+
+  const linePath = lineGenerator(data);
+  const [device, setDevice] = useState();
+  return (
+    <>
+      <Image
+        transition={200}
+        source={require("@/assets/images/bg-2.png")}
+        style={{
+          transform: [{ scale: 1.0 }],
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 0,
+        }}
+      ></Image>
+      <SafeAreaView
+        style={{ paddingTop: Constants.statusBarHeight * 1.3 }}
+        className="flex-1 justify-start   px-5 gap-5"
+      >
+        {/* <View className="justify-between items-center flex-row w-full  ">
+          <Image
+            contentFit="contain"
+            source={require("@/assets/images/logo_horizontal.png")}
+            style={{
+              width: 170,
+              height: 50,
+            }}
+          ></Image>
+          <Button
+            type="secondary"
+            className="aspect-square w-16 justify-center items-center h-16 "
+          >
+            <Notification color="white"></Notification>
+          </Button>
+        </View> */}
+        <H1 className="text-left">Today Activity</H1>
+        <Card className="p-0 overflow-hidden gap-0">
+          <View className="px-3 pt-3">
+            <View className="flex-row items-center gap-1">
+              <View className="p-3 bg-card border justify-center items-center border-border rounded-full">
+                <BrainIcon color="white"></BrainIcon>
+              </View>
+              <P className="text-left text-2xl text-white">Brain waves</P>
+            </View>
+            <P className="text-left">Last update 03:20</P>
+          </View>
+          <Svg width={width} height={height}>
+            <Path d={linePath} fill="none" stroke="#6747ED" strokeWidth={5} />
+          </Svg>
+        </Card>
+        <View className="flex-row w-full gap-3">
+          <Card className="p-3 bg-primary overflow-hidden flex-1 gap-3">
+            <View className="">
+              <View className="flex-row items-center gap-1">
+                <View className="p-2 bg-card border justify-center items-center border-border rounded-full">
+                  <BrainIcon color="white"></BrainIcon>
+                </View>
+                <P className="text-left text-lg text-white">Focus Rating</P>
+              </View>
+              <P className="text-left text-sm">Last update 03:20</P>
+            </View>
+            <P className="text-3xl text-white text-left">7/10</P>
+          </Card>
+          <Card className="p-3 bg-primary overflow-hidden flex-1 gap-3 ">
+            <View className="">
+              <View className="flex-row items-center gap-1">
+                <View className="p-2 bg-card border justify-center items-center border-border rounded-full">
+                  <BrainIcon color="white"></BrainIcon>
+                </View>
+                <P className="text-left text-lg text-white">Stress Level</P>
+              </View>
+              <P className="text-left text-sm">Last update 03:20</P>
+            </View>
+            <P className="text-3xl text-white text-left">7/10</P>
+          </Card>
+        </View>
+        {device ? <DeviceCard></DeviceCard> : <NoDeviceCard></NoDeviceCard>}
+      </SafeAreaView>
+    </>
+  );
+}

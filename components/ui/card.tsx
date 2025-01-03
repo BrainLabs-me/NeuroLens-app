@@ -5,7 +5,7 @@ export default function Card(props: any) {
   return (
     <View
       className={cn(
-        "border border-border gap-3 bg-card rounded-[30px] p-4  py-4  w-full ",
+        "border border-border gap-3 bg-card rounded-[30px] p-4    w-full ",
         props.className
       )}
     >

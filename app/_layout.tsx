@@ -3,7 +3,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { Stack } from "expo-router";
+import { Redirect, Slot, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -17,11 +17,11 @@ import {
   Poppins_700Bold,
   useFonts,
 } from "@expo-google-fonts/poppins";
+import { UserProvider, useUser } from "@/context/userContext";
+import { useToken } from "@/hooks/useToken";
 
 SplashScreen.preventAutoHideAsync();
-export const unstable_settings = {
-  initialRouteName: "register",
-};
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
@@ -42,8 +42,20 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{ headerShown: false }} />
-      <StatusBar style="auto" />
+      <UserProvider>
+        <Stack
+          initialRouteName="(app)/start"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="/(app)/auth/login" options={{}}></Stack.Screen>
+          <Stack.Screen name="/(app)/auth/register" options={{}}></Stack.Screen>
+          <Stack.Screen
+            name="/(app)/start"
+            options={{ animation: "fade", presentation: "transparentModal" }}
+          ></Stack.Screen>
+        </Stack>
+      </UserProvider>
+      <StatusBar style="light" />
     </ThemeProvider>
   );
 }
