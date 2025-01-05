@@ -1,6 +1,6 @@
 import { Image } from "react-native";
 import * as Google from "expo-auth-session/providers/google";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { router } from "expo-router";
 import axios from "axios";
 import Button from "./ui/button";
@@ -14,9 +14,10 @@ export default function GoogleButton({ className }: { className?: string }) {
   });
   const { setUser } = useUser();
   const { setToken } = useToken();
-
+  const [loading, setLoading] = useState(false);
   async function googleLogin(id?: string) {
     try {
+      setLoading(true);
       const res = await axios.post(
         process.env.EXPO_PUBLIC_API_URL + "/google/login",
         {
@@ -34,6 +35,8 @@ export default function GoogleButton({ className }: { className?: string }) {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -44,6 +47,7 @@ export default function GoogleButton({ className }: { className?: string }) {
   return (
     <>
       <Button
+        loading={loading}
         onPress={() => promptAsync()}
         icon={
           <Image

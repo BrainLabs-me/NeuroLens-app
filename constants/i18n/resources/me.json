@@ -1,0 +1,12 @@
+{
+  "welcome": "Dobrodošli!",
+  "hello": "Zdravo!",
+  "language_switch": "Jezik",
+  "profile": {
+    "security": "Bezbijednost",
+    "privacy-policy": "Politika privatnosti",
+    "language": "Jezik",
+    "notifications": "Obavjestenja",
+    "log-out": "Odjavi se"
+  }
+}

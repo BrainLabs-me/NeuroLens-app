@@ -26,6 +26,7 @@ export default function TabBar({
         options: "",
       }; // Novi objekat
       newRoutes.splice(2, 0, newObject); // Ubacujemo na indeks 2
+      console.log(newRoutes);
       return newRoutes; // Vraćamo ažurirani niz
     });
   }, [state.routes]);

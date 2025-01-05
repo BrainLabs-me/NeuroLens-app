@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import React from "react";
 import { ReactNode } from "react";
 import {
   TouchableOpacity,
@@ -26,19 +27,24 @@ export default function Button(props: ButtonType) {
       className={cn(styles[props.type || "primary"], props.className)}
       onPress={props.onPress}
     >
-      {props.icon}
-      <Text
-        style={{ fontFamily: "Poppins_500Medium", includeFontPadding: false }}
-        className="text-white justify-center  text-center items-center text-[16px]"
-      >
-        {props.loading ? (
-          <View className="justify-center items-center w-full">
-            <ActivityIndicator color={"white"}></ActivityIndicator>
-          </View>
-        ) : (
-          props.children
-        )}
-      </Text>
+      {props.loading ? (
+        <View className="justify-center items-center w-full">
+          <ActivityIndicator color={"white"}></ActivityIndicator>
+        </View>
+      ) : (
+        <>
+          {props.icon}
+          <Text
+            style={{
+              fontFamily: "Poppins_500Medium",
+              includeFontPadding: false,
+            }}
+            className="text-white justify-center  text-center items-center text-[16px]"
+          >
+            {props.children}
+          </Text>
+        </>
+      )}
     </TouchableOpacity>
   );
 }

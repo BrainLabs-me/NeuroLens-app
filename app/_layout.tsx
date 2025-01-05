@@ -19,7 +19,9 @@ import {
 } from "@expo-google-fonts/poppins";
 import { UserProvider, useUser } from "@/context/userContext";
 import { useToken } from "@/hooks/useToken";
-
+import "../constants/i18n";
+import i18n from "../constants/i18n";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -32,10 +34,17 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
     }
   }, [loaded]);
-
+  useEffect(() => {
+    const loadLanguage = async () => {
+      const savedLanguage = await AsyncStorage.getItem("language");
+      if (savedLanguage) {
+        i18n.changeLanguage(savedLanguage);
+      }
+    };
+    loadLanguage();
+  }, [i18n]);
   if (!loaded) {
     return null;
   }
@@ -43,17 +52,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <UserProvider>
-        <Stack
-          initialRouteName="(app)/start"
-          screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen name="/(app)/auth/login" options={{}}></Stack.Screen>
-          <Stack.Screen name="/(app)/auth/register" options={{}}></Stack.Screen>
-          <Stack.Screen
-            name="/(app)/start"
-            options={{ animation: "fade", presentation: "transparentModal" }}
-          ></Stack.Screen>
-        </Stack>
+        <Slot />
       </UserProvider>
       <StatusBar style="light" />
     </ThemeProvider>

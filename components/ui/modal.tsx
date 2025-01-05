@@ -15,7 +15,8 @@ const Modal = (props: any) => {
   return (
     <>
       <RnModal
-        animationType="fade"
+        animationType="slide"
+        statusBarTranslucent
         visible={modalVisible}
         transparent
         onRequestClose={() => {

@@ -28,6 +28,8 @@ export default function App() {
   }));
   return (
     <>
+      <View className="absolute px-5 gap-12 bg-background w-full h-full" />
+
       <SafeAreaView className="flex-1 justify-start gap-12 px-5 items-center">
         <Animated.Image
           source={require("@/assets/images/Device_BG.png")}

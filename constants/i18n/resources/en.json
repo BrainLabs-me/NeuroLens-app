@@ -1,0 +1,12 @@
+{
+  "welcome": "Welcome!",
+  "hello": "Hello!",
+  "language_switch": "Language",
+  "profile": {
+    "security": "Security",
+    "privacy-policy": "Privacy Policy",
+    "language": "Language",
+    "notifications": "Notifications",
+    "log-out": "Log out"
+  }
+}
