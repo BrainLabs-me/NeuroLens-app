@@ -8,5 +8,34 @@
     "language": "Language",
     "notifications": "Notifications",
     "log-out": "Log out"
+  },
+  "reminder": {
+    "title": "Reminder",
+    "action": "Add",
+    "fallback": "No reminders"
+  },
+  "placeholders": {
+    "email": "Enter your email"
+  },
+  "forgot-password": {
+    "title": "Forgot password",
+    "subtitle": "Enter the email address with your account and we'll send an email with confirmation to reset your password.",
+    "action": "Send Code"
+  },
+  "code-verification": {
+    "title": "Please check your email",
+    "subtitle": "We have sent the code to: ",
+    "timer": "Send the code again in: ",
+    "resend-success": "Code resent successfully!",
+    "action": "Verification",
+    "secondary-action": "Resend Code"
+  },
+  "change-password": {
+    "title": "Create new password",
+    "action": "Reset password",
+    "characters": "At least 8 characters",
+    "numbers": "At least 1 number",
+    "uppercase": "At least 1 uppercase letter",
+    "match": "Passwords match"
   }
 }

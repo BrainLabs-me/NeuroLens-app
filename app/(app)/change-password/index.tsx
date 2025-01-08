@@ -11,6 +11,7 @@ import { Text } from "react-native";
 import H1 from "@/components/ui/text";
 import { CloseCircle, Eye, EyeSlash, TickCircle } from "iconsax-react-native"; // Import EyeSlash
 import Button from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 // Define the state type for password visibility
 interface PasswordVisibility {
@@ -19,6 +20,7 @@ interface PasswordVisibility {
 }
 
 export default function Page() {
+  const { t, i18n } = useTranslation();
   // Use the state type for passwordVisibility
   const [passwordVisibility, setPasswordVisibility] =
     useState<PasswordVisibility>({
@@ -32,19 +34,19 @@ export default function Page() {
   // Password validation criteria
   const validations = [
     {
-      label: "At least 8 characters",
+      label: t("change-password.characters"),
       isValid: password.length >= 8,
     },
     {
-      label: "At least 1 number",
+      label: t("change-password.numbers"),
       isValid: /\d/.test(password),
     },
     {
-      label: "At least 1 uppercase letter",
+      label: t("change-password.uppercase"),
       isValid: /[A-Z]/.test(password),
     },
     {
-      label: "Passwords match",
+      label: t("change-password.match"),
       isValid: password === confirmPassword,
     },
   ];
@@ -75,16 +77,16 @@ export default function Page() {
           style={styles.logo}
         />
         <View className="flex w-full mt-3 mb-7 flex-col ">
-          <H1 className="mb-2 text-left">Create new password</H1>
+          <H1 className="mb-2 text-left">{t("change-password.title")}</H1>
           <Text className="text-[rgba(255,255,255,0.5)] text-[14px]">
-            We have sent the code to test@gmail.com
+            {t("code-verification.subtitle")} test@gmail.com
           </Text>
         </View>
         <View className="flex flex-col gap-4 w-full justify-between">
           {/* New Password Field */}
           <View>
             <Text className="text-white text-[16px] mb-2 ml-2">
-              New Password
+              {t("change-password.new-password")}
             </Text>
             <View className="bg-card border w-full flex-row items-center border-border rounded-full px-[20px] gap-[6px] text-center ">
               <TextInput
@@ -120,7 +122,7 @@ export default function Page() {
           {/* Confirm Password Field */}
           <View>
             <Text className="text-white text-[16px] mb-2 ml-2">
-              Confirm Password
+              {t("change-password.confirm-password")}
             </Text>
             <View className="bg-card border w-full flex-row items-center border-border rounded-full px-[20px] gap-[6px] text-center ">
               <TextInput
@@ -179,7 +181,7 @@ export default function Page() {
         </View>
       </SafeAreaView>
       <Button className="py-4 absolute bottom-4 left-4 right-4 z-30">
-        Reset password
+        {t("change-password.action")}
       </Button>
     </>
   );

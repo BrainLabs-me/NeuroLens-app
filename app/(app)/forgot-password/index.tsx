@@ -7,8 +7,10 @@ import H1, { P } from "@/components/ui/text";
 import { Lock, PasswordCheck } from "iconsax-react-native";
 import Button from "@/components/ui/button";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function Page() {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <Image
@@ -27,18 +29,21 @@ export default function Page() {
           style={styles.logo}
         />
         <View className="flex w-full mt-3 mb-7 flex-col ">
-          <H1 className="mb-2 text-left">Forgot password?</H1>
+          <H1 className="mb-2 text-left">{t("forgot-password.title")}</H1>
           <Text className="text-[rgba(255,255,255,0.5)] text-[14px]">
-            Enter the email address with your account and we'll send an email
-            with confirmation to reset your password.
+            {t("forgot-password.subtitle")}
           </Text>
         </View>
         <View className="flex flex-col gap-4 w-full justify-between">
-          <Input placeholder="Enter your email" label="Email" icon={<></>} />
+          <Input
+            placeholder={t("placeholders.email")}
+            label="Email"
+            icon={<></>}
+          />
         </View>
       </SafeAreaView>
       <Button className="py-4 absolute bottom-4 left-4 right-4">
-        Send Code
+        {t("forgot-password.action")}
       </Button>
     </>
   );

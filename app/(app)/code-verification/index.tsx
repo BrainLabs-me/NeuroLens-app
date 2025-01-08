@@ -11,8 +11,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { Text } from "react-native";
 import H1 from "@/components/ui/text";
 import Button from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export default function Page() {
+  const { t, i18n } = useTranslation();
   const [code, setCode] = useState(""); // Single string for the code
   const [timer, setTimer] = useState(60); // 1-minute timer
   const [resendEnabled, setResendEnabled] = useState(false); // Resend button state
@@ -32,7 +34,7 @@ export default function Page() {
   const handleResendCode = () => {
     setTimer(60); // Reset timer
     setResendEnabled(false);
-    setMessage("Code resent successfully!");
+    setMessage(t("code-verification.resend-success"));
     setTimeout(() => setMessage(""), 3000); // Clear message after 3 seconds
   };
 
@@ -49,6 +51,7 @@ export default function Page() {
 
   // Handle form submission
   const handleSubmit = () => {
+    //bzvz nesto
     if (code.length === 5) {
       Alert.alert("Verification Code", `Your code is: ${code}`);
     } else {
@@ -74,9 +77,9 @@ export default function Page() {
           style={styles.logo}
         />
         <View className="flex w-full mt-3 mb-7 flex-col ">
-          <H1 className="mb-2 text-left">Please Check your Email</H1>
+          <H1 className="mb-2 text-left">{t("code-verification.title")}</H1>
           <Text className="text-[rgba(255,255,255,0.5)] text-[14px]">
-            We have sent the code to test@gmail.com
+            {t("code-verification.subtitle") + "test@gmail.com"}
           </Text>
         </View>
 
@@ -128,11 +131,13 @@ export default function Page() {
         <Text className="text-gray-600 mt-3">
           {resendEnabled ? (
             <TouchableOpacity onPress={handleResendCode}>
-              <Text className="font-bold text-primary">Resend Code</Text>
+              <Text className="font-bold text-primary">
+                {t("code-verification.secondary-action")}
+              </Text>
             </TouchableOpacity>
           ) : (
             <>
-              Send the code again in{" "}
+              {t("code-verification.timer")}{" "}
               <Text className="font-bold text-white">
                 {`00:${timer.toString().padStart(2, "0")}`}
               </Text>
@@ -151,7 +156,7 @@ export default function Page() {
         className="py-4 absolute bottom-4 left-4 right-4"
         onPress={handleSubmit}
       >
-        Verification
+        {t("code-verification.action")}
       </Button>
     </>
   );
