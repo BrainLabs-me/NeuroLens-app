@@ -22,7 +22,9 @@ import { router } from "expo-router";
 import { useUser } from "@/context/userContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/navigation/header";
+import { useTranslation } from "react-i18next";
 export default function Page() {
+  const { t, i18n } = useTranslation();
   const [reminders, setReminders] = useState([1, 2, 3]);
   return (
     <>
@@ -58,9 +60,11 @@ export default function Page() {
         style={{ paddingTop: Constants.statusBarHeight + 20 }}
         className="flex-1 px-5 gap-5  "
       >
-        <H1 className="text-left">Reminders</H1>
+        <H1 className="text-left">{t("reminder.title")}</H1>
         <Card className="border-dashed flex-row items-center justify-between">
-          <P className="text-left text-2xl text-white">Add</P>
+          <P className="text-left text-2xl text-white">
+            {t("reminder.action")}
+          </P>
           <AddCircle color="white"></AddCircle>
         </Card>
         {reminders.length > 0 ? (
@@ -82,7 +86,7 @@ export default function Page() {
             }}
           ></FlatList>
         ) : (
-          <P>No Reminders</P>
+          <P>{t("reminder.fallback")}</P>
         )}
       </SafeAreaView>
     </>

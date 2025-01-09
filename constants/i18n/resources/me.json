@@ -8,5 +8,36 @@
     "language": "Jezik",
     "notifications": "Obavjestenja",
     "log-out": "Odjavi se"
+  },
+  "reminder": {
+    "title": "Podsjetnik",
+    "action": "Dodaj",
+    "fallback": "Nema podsjetnika"
+  },
+  "placeholders": {
+    "email": "Unesite e-mail",
+    "new-password": "Unesite lozinku",
+    "confirm-password": "Potvrdite lozinku"
+  },
+  "forgot-password": {
+    "title": "Zaboravili ste lozinku?",
+    "subtitle": "Unesite e-mail adresu povezanu s vašim nalogom i poslaćemo vam e-poruku sa potvrdom za resetovanje lozinke.",
+    "action": "Pošalji kod"
+  },
+  "code-verification": {
+    "title": "Molimo vas provjerite inbox",
+    "subtitle": "Kod je poslat na adresu: ",
+    "timer": "Pošalji ponovo za: ",
+    "resend-success": "Kod uspješno poslat!",
+    "action": "Verifikacija",
+    "secondary-action": "Ponovo pošalji"
+  },
+  "change-password": {
+    "title": "Kreirajte novu lozinku",
+    "action": "Resetuj lozinku",
+    "characters": "Bar 8 znakova",
+    "numbers": "Bar 1 broj",
+    "uppercase": "Bar 1 veliko slovo",
+    "match": "Sifre se poklapaju"
   }
 }
