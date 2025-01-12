@@ -1,5 +1,6 @@
 {
   "welcome": "Welcome!",
+  "welcome-back": "Welcome back!",
   "hello": "Hello!",
   "language_switch": "Language",
   "profile": {
@@ -7,7 +8,8 @@
     "privacy-policy": "Privacy Policy",
     "language": "Language",
     "notifications": "Notifications",
-    "log-out": "Log out"
+    "log-out": "Log out",
+    "log-out-action": "You'll log out of"
   },
   "reminder": {
     "title": "Reminder",
@@ -15,10 +17,14 @@
     "fallback": "No reminders"
   },
   "placeholders": {
-    "email": "Enter your email"
+    "email": "Enter your email",
+    "password": "Password",
+    "new-password": "Unesite lozinku",
+    "confirm-password": "Potvrdite lozinku",
+    "not-registered": "Don't have an account?"
   },
   "forgot-password": {
-    "title": "Forgot password",
+    "title": "Forgot password?",
     "subtitle": "Enter the email address with your account and we'll send an email with confirmation to reset your password.",
     "action": "Send Code"
   },
@@ -37,5 +43,33 @@
     "numbers": "At least 1 number",
     "uppercase": "At least 1 uppercase letter",
     "match": "Passwords match"
+  },
+  "log-in": {
+    "action": "Log in",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id volutpat quam.",
+    "continue": "Continue with",
+    "register": "Register"
+  },
+  "start": {
+    "title": "Relax and achieve greater peace of mind",
+    "subtitle": "Relax and achieve greater peace of mind",
+    "action": "Start as guest",
+    "account": "Don't have an account?"
+  },
+  "home": {
+    "title": "Today Activity",
+    "update": "Last update",
+    "focus": "Focus Rating",
+    "stress": "Stress Level",
+    "brain": "Brain waves",
+    "connection-off": "No connected EEG",
+    "connection-on": "Connected"
+  },
+  "device": {
+    "connected": "Connected",
+    "connect": "Connect",
+    "disconnect": "Disconnect",
+    "update": "Firmware update",
+    "number": "Device no."
   }
 }

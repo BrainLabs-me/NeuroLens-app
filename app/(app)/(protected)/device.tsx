@@ -18,7 +18,9 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
 export default function App() {
+  const { t, i18n } = useTranslation();
   const scale = useSharedValue(1);
   useEffect(() => {
     scale.value = withRepeat(withTiming(1.2, { duration: 1200 }), -1, true);
@@ -50,7 +52,7 @@ export default function App() {
           >
             <ArrowLeft color="white" size={28}></ArrowLeft>
           </TouchableOpacity>
-          <P className="text-2xl text-white">YYY_4860</P>
+          <P className="text-2xl text-white">{t("device.number")} YYY_4860</P>
           <View className="opacity-0">
             <ArrowLeft></ArrowLeft>
           </View>
@@ -64,13 +66,13 @@ export default function App() {
           }}
         ></Image>
         <View className="gap-2">
-          <P className="text-2xl text-white">Device no. YYY_4860</P>
+          <P className="text-2xl text-white">{t("device.number")} YYY_4860</P>
           <View className="flex items-center"></View>
           <View className="flex-row gap-12">
             <View className="flex-row items-center gap-1">
               <View className="h-2 w-2 rounded-full bg-primary"></View>
               <Electricity color="white"></Electricity>
-              <P className="text-left items-center">Connected</P>
+              <P className="text-left items-center">{t("device.connected")}</P>
             </View>
             <View className="flex-row items-center gap-1">
               <View className="relative  justify-center ">
@@ -88,7 +90,7 @@ export default function App() {
                 <Bluetooth color="white"></Bluetooth>
               </View>
               <View>
-                <P className="text-left text-lg">Fimware Update</P>
+                <P className="text-left text-lg">{t("device.update")}</P>
               </View>
             </Card>
             <Card className="flex-1">
@@ -96,7 +98,7 @@ export default function App() {
                 <Bluetooth color="white"></Bluetooth>
               </View>
               <View>
-                <P className="text-left text-lg">Fimware Update</P>
+                <P className="text-left text-lg">{t("device.update")}</P>
               </View>
             </Card>
           </View>
@@ -106,7 +108,7 @@ export default function App() {
                 <Bluetooth color="white"></Bluetooth>
               </View>
               <View>
-                <P className="text-left text-lg">Fimware Update</P>
+                <P className="text-left text-lg">{t("device.update")}</P>
               </View>
             </Card>
             <Card className="flex-1">
@@ -114,12 +116,12 @@ export default function App() {
                 <Bluetooth color="white"></Bluetooth>
               </View>
               <View>
-                <P className="text-left text-lg">Fimware Update</P>
+                <P className="text-left text-lg">{t("device.update")}</P>
               </View>
             </Card>
           </View>
         </View>
-        <Button className="w-full">Dissconect</Button>
+        <Button className="w-full">{t("device.disconnect")}</Button>
       </SafeAreaView>
     </>
   );
