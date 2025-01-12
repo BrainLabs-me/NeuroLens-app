@@ -10,7 +10,9 @@ import {
 import H1, { P } from "@/components/ui/text";
 import Card from "@/components/ui/card";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
 export default function DeviceCard() {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <TouchableOpacity
@@ -34,7 +36,9 @@ export default function DeviceCard() {
               </View>
               <View className="flex-row items-center gap-1">
                 <Electricity color="white"></Electricity>
-                <P className="text-left items-center">Connected</P>
+                <P className="text-left items-center">
+                  {t("home.connection-on")}
+                </P>
               </View>
             </View>
           </View>
@@ -53,6 +57,7 @@ export default function DeviceCard() {
 }
 
 export function NoDeviceCard() {
+  const { t, i18n } = useTranslation();
   return (
     <TouchableOpacity onPress={() => router.push("/(app)/(protected)/device")}>
       <Card className="flex-row  justify-between items-center">
@@ -60,7 +65,9 @@ export function NoDeviceCard() {
           <View className="p-2 bg-card border justify-center items-center border-border rounded-full">
             <Bluetooth color="white"></Bluetooth>
           </View>
-          <P className="text-left text-xl text-white">No connected EEG</P>
+          <P className="text-left text-xl text-white">
+            {t("home.connection-off")}
+          </P>
         </View>
         <Add color="white" size={30}></Add>
       </Card>

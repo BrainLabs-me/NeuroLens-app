@@ -120,7 +120,7 @@ export default function Page() {
             <Modal
               heading={"Log out?"}
               onPress={() => logout()}
-              description={`You'll log out of ${user?.name}`}
+              description={`${t("profile.log-out-action")} ${user?.name}`}
               trigger={
                 <View className="flex-row items-center justify-between">
                   <View className="flex-row items-center gap-3">
