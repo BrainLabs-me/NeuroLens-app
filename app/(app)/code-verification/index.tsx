@@ -73,7 +73,7 @@ export default function Page() {
       <SafeAreaView className="flex w-full max-w-[90%] mx-auto z-20 flex-col justify-center items-center">
         {/* Logo Image */}
         <Image
-          source={require("@/assets/images/logo.png")}
+          source={require("@/assets/images/logo_horizontal.png")}
           style={styles.logo}
         />
         <View className="flex w-full mt-3 mb-7 flex-col ">

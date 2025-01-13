@@ -71,5 +71,10 @@
     "disconnect": "Disconnect",
     "update": "Firmware update",
     "number": "Device no."
+  },
+  "password-changed": {
+    "title": "Password Changed",
+    "message": "Your password has been changed successfully",
+    "action": "Back to Login"
   }
 }

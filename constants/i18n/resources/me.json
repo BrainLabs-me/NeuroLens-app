@@ -71,5 +71,10 @@
     "disconnect": "Odveži se",
     "update": "Ažuriranje firmvera",
     "number": "Broj uređaja"
+  },
+  "password-changed": {
+    "title": "Lozinka promijenjena",
+    "message": "Vaša lozinka je uspješno promijenjena",
+    "action": "Nazad na Login"
   }
 }
