@@ -30,14 +30,14 @@ export default function Page() {
         {/* Logo Image */}
         <TickCircle color="white" size={130}></TickCircle>
         <View className="flex w-full mt-3 mb-7 flex-col items-center justify-center ">
-          <H1 className="mb-2 text-left">Password Changed</H1>
+          <H1 className="mb-2 text-left">{t("password-changed.title")}</H1>
           <Text className="text-[rgba(255,255,255,0.5)] text-[15px]">
-            Your password has been changed successfully
+            {t("password-changed.message")}
           </Text>
         </View>{" "}
         <TouchableOpacity className="w-full">
           <Button className="mt-6 w-full" onPress={() => router.push("/")}>
-            Back to Login
+            {t("password-changed.action")}
           </Button>
         </TouchableOpacity>
       </SafeAreaView>
