@@ -76,5 +76,29 @@
     "title": "Lozinka promijenjena",
     "message": "Vaša lozinka je uspješno promijenjena",
     "action": "Nazad na Login"
+  },
+
+  "privacy-policy": {
+    "title": "Politika Privatnosti",
+    "effective-date": {
+      "title": "Datum Stupanja na Snagu",
+      "text": "Ova Politika Privatnosti važi od 11. januara 2025."
+    },
+    "info-we-collect": {
+      "title": "Informacije Koje Prikupljamo",
+      "text": "Prikupljamo sljedeće vrste informacija:\n\n1. EEG Podaci: Prikupljamo EEG podatke sa vašeg NeuroLens uređaja kako bismo analizirali nivoe fokusa i poboljšali korisničko iskustvo.\n\n2. Lične Informacije: Ovo uključuje vaše ime, email adresu i sve ostale podatke koje nam dostavite prilikom kreiranja naloga ili komunikacije s nama.\n\n3. Podaci o Korišćenju Aplikacije: Prikupljamo anonimnu statistiku o vašim interakcijama sa aplikacijom kako bismo identifikovali trendove i poboljšali funkcionalnost."
+    },
+    "how-we-use": {
+      "title": "Kako Koristimo Vaše Informacije",
+      "text": "Prikupljene informacije koristimo za sljedeće svrhe:\n\n1. EEG Analiza: Kako bismo pružili uvide u vaše nivoe fokusa i generisali personalizovane izvještaje.\n\n2. Poboljšanje Proizvoda: Kako bismo unaprijedili naše algoritme i poboljšali ukupni kvalitet proizvoda i usluga.\n\n3. Korisnička Podrška: Kako bismo odgovorili na vaše upite, riješili probleme i osigurali nesmetano korisničko iskustvo.\n\n4. Komunikacija: Kako bismo vam slali ažuriranja, važne obavijesti i marketinške materijale ako ste se za to prijavili."
+    },
+    "third-party": {
+      "title": "Dijeljenje Sa Trećim Licima",
+      "text": "Vašu privatnost stavljamo na prvo mjesto i ne dijelimo vaše podatke sa trećim licima bez vaše izričite saglasnosti. Izuzeci mogu uključivati pravne zahtjeve, gdje smo obavezni da otkrijemo informacije kako bismo ispunili važeće zakone ili propise."
+    },
+    "contact-us": {
+      "title": "Kontaktirajte Nas",
+      "text": "Ako imate bilo kakva pitanja o ovoj Politici Privatnosti ili o tome kako postupamo s vašim podacima, slobodno nas kontaktirajte:\n\n- Email: support@neurolens.com\n-"
+    }
   }
 }

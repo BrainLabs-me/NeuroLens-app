@@ -78,7 +78,12 @@ export default function Page() {
               <ArrowRight2 color="white" size={28}></ArrowRight2>
             </TouchableOpacity>
             <View className="h-[1px] bg-border w-[88%] "></View>
-            <TouchableOpacity className="flex-row items-center justify-between w-full">
+            <TouchableOpacity
+              className="flex-row items-center justify-between w-full"
+              onPress={() =>
+                router.push("/(app)/(protected)/(settings)/privacy-policy")
+              }
+            >
               <View className="flex-row items-center gap-3">
                 <SecurityUser color="white" size={28}></SecurityUser>
                 <P className="text-[16px]">{t("profile.privacy-policy")}</P>
