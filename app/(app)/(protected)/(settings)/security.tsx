@@ -9,7 +9,6 @@ import {
   SecurityUser,
 } from "iconsax-react-native";
 import { View, Text, TouchableOpacity } from "react-native";
-import Gravatar from "@/components/ui/gravatar";
 import { Image, ImageBackground } from "expo-image";
 import { Image as RnImage } from "react-native";
 
@@ -62,75 +61,40 @@ export default function Page() {
         source={require("@/assets/images/bg-3.png")}
       ></RnImage>
       <Header></Header>
-      <View className="flex-1 px-5 gap-2  items-center  translate-y-[-60px]">
+      <View className="flex-1 gap-4 items-center">
         <View className="w-full gap-5">
-          <Card className="text-center justify-center items-center mt-5 rounded-none">
-            <TouchableOpacity className="flex-row items-center justify-between w-full">
+          <View className="flex flex-col gap-2">
+            <H1>Security</H1>
+            <P>Manage your account security</P>
+          </View>
+          <Card className="text-center justify-center items-center py-12 gap-4 mt-5 rounded-none">
+            <TouchableOpacity
+              className="flex-row items-center justify-between w-full"
+              onPress={() => router.push("/(app)/forgot-password")}
+            >
               <View className="flex-row items-center gap-3">
                 <SecuritySafe color="white" size={28}></SecuritySafe>
-                <P className="text-[16px]">{t("profile.security")}</P>
+                <P className="text-[16px]">{t("security.change-password")}</P>
               </View>
               <ArrowRight2 color="white" size={28}></ArrowRight2>
             </TouchableOpacity>
             <View className="h-[1px] bg-border w-[88%] "></View>
             <TouchableOpacity
-              className="flex-row items-center justify-between w-full"
+              className="flex-row items-center justify-between w-full mt-6"
               onPress={() =>
-                router.push("/(app)/(protected)/(settings)/privacy-policy")
+                // router.push("/(app)/(protected)/(settings)/privacy-policy")
+                "DELETE ACCOUNT REQ"
               }
             >
               <View className="flex-row items-center gap-3">
-                <SecurityUser color="white" size={28}></SecurityUser>
-                <P className="text-[16px]">{t("profile.privacy-policy")}</P>
+                <SecurityUser color="red" size={28}></SecurityUser>
+                <P className="text-[16px] text-red-600">
+                  {t("security.delete-account")}
+                </P>
               </View>
               <ArrowRight2 color="white" size={28}></ArrowRight2>
             </TouchableOpacity>
             <View className="h-[1px] bg-border w-[88%] "></View>
-            <TouchableOpacity
-              onPress={() =>
-                router.push("/(app)/(protected)/(settings)/language")
-              }
-              className="flex-row items-center justify-between w-full"
-            >
-              <View className="flex-row items-center gap-3">
-                <BrushBig color="white" size={28}></BrushBig>
-                <P className="text-[16px]">{t("profile.language")}</P>
-              </View>
-              <ArrowRight2 color="white" size={28}></ArrowRight2>
-            </TouchableOpacity>
-            <View className="h-[1px] bg-border w-[88%] "></View>
-            <TouchableOpacity className="flex-row items-center justify-between w-full">
-              <View className="flex-row items-center gap-3">
-                <Notification1 color="white" size={28}></Notification1>
-                <P className="text-[16px]">{t("profile.notifications")}</P>
-              </View>
-              <Switch
-                value={isEnabled}
-                onValueChange={(val) => toggleSwitch()}
-                backgroundActive={"#6747ED"}
-                backgroundInactive={"gray"}
-                renderActiveText={false}
-                circleBorderActiveColor="#6747ED"
-                circleBorderInactiveColor="gray"
-                renderInActiveText={false}
-              />
-            </TouchableOpacity>
-          </Card>
-          <Card className="py-3">
-            <Modal
-              heading={"Log out?"}
-              onPress={() => logout()}
-              description={`${t("profile.log-out-action")} ${user?.name}`}
-              trigger={
-                <View className="flex-row items-center justify-between">
-                  <View className="flex-row items-center gap-3">
-                    <Logout color="white" size={28}></Logout>
-                    <P className="text-[16px]">{t("profile.log-out")}</P>
-                  </View>
-                  <ArrowRight2 color="white" size={28}></ArrowRight2>
-                </View>
-              }
-            ></Modal>
           </Card>
         </View>
       </View>
