@@ -77,6 +77,10 @@
     "message": "Your password has been changed successfully",
     "action": "Back to Login"
   },
+  "security": {
+    "change-password": "Change Password",
+    "delete-account": "Delete Account"
+  },
 
   "privacy-policy": {
     "title": "Privacy Policy",
