@@ -70,7 +70,11 @@ export default function Page() {
             {user?.type === "auth" && <P>{user?.email}</P>}
           </View>
           <Card className="text-center justify-center items-center mt-5">
-            <TouchableOpacity className="flex-row items-center justify-between w-full">
+            <TouchableOpacity className="flex-row items-center justify-between w-full"
+              onPress={() =>
+                router.push("/(app)/(protected)/(settings)/security")
+              }
+            >
               <View className="flex-row items-center gap-3">
                 <SecuritySafe color="white" size={28}></SecuritySafe>
                 <P className="text-[16px]">{t("profile.security")}</P>
