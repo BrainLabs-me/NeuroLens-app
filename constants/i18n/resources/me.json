@@ -77,6 +77,10 @@
     "message": "Vaša lozinka je uspješno promijenjena",
     "action": "Nazad na Login"
   },
+  "security": {
+    "change-password": "Promijenite lozinku",
+    "delete-account": "Obrišite nalog"
+  },
 
   "privacy-policy": {
     "title": "Politika Privatnosti",
