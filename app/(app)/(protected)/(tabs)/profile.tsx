@@ -70,7 +70,11 @@ export default function Page() {
             {user?.type === "auth" && <P>{user?.email}</P>}
           </View>
           <Card className="text-center justify-center items-center mt-5">
-            <TouchableOpacity className="flex-row items-center justify-between w-full">
+            <TouchableOpacity className="flex-row items-center justify-between w-full"
+              onPress={() =>
+                router.push("/(app)/(protected)/(settings)/security")
+              }
+            >
               <View className="flex-row items-center gap-3">
                 <SecuritySafe color="white" size={28}></SecuritySafe>
                 <P className="text-[16px]">{t("profile.security")}</P>
@@ -78,7 +82,12 @@ export default function Page() {
               <ArrowRight2 color="white" size={28}></ArrowRight2>
             </TouchableOpacity>
             <View className="h-[1px] bg-border w-[88%] "></View>
-            <TouchableOpacity className="flex-row items-center justify-between w-full">
+            <TouchableOpacity
+              className="flex-row items-center justify-between w-full"
+              onPress={() =>
+                router.push("/(app)/(protected)/(settings)/privacy-policy")
+              }
+            >
               <View className="flex-row items-center gap-3">
                 <SecurityUser color="white" size={28}></SecurityUser>
                 <P className="text-[16px]">{t("profile.privacy-policy")}</P>
@@ -120,7 +129,7 @@ export default function Page() {
             <Modal
               heading={"Log out?"}
               onPress={() => logout()}
-              description={`You'll log out of ${user?.name}`}
+              description={`${t("profile.log-out-action")} ${user?.name}`}
               trigger={
                 <View className="flex-row items-center justify-between">
                   <View className="flex-row items-center gap-3">

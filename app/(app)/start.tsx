@@ -13,7 +13,9 @@ import { useToken } from "@/hooks/useToken";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "@/lib/types";
 import { useUser } from "@/context/userContext";
+import { useTranslation } from "react-i18next";
 export default function IndexPage() {
+  const { t, i18n } = useTranslation();
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
     redirectUri: "com.brainlabs.neurolens://",
@@ -63,8 +65,8 @@ export default function IndexPage() {
         </View>
         <View className="px-5 w-full gap-3">
           <View>
-            <H1>Relax and achieve {"\n"} greater peace of mind</H1>
-            <P>Relax and achieve greater peace of mind</P>
+            <H1>{t("start.title")}</H1>
+            <P>{t("start.subtitle")}</P>
           </View>
           <View className="flex w-full flex-row gap-3">
             <GoogleButton className="flex-1 py-2 "></GoogleButton>
@@ -85,19 +87,19 @@ export default function IndexPage() {
               </Text>
             </TouchableOpacity>
           </View>
-          <Button onPress={() => start_as_guest()}>Start as guest</Button>
+          <Button onPress={() => start_as_guest()}>{t("start.action")}</Button>
         </View>
         <Text
           className="text-white text-center font-bold pb-5"
           style={{ fontFamily: "Poppins_500Medium" }}
         >
-          Don’t have an account?{" "}
+          {t("start.account")}{" "}
           <Link
             href={"/(app)/auth/register"}
             className="text-primary"
             style={{ fontFamily: "Poppins_700Bold" }}
           >
-            Register
+            {t("log-in.register")}
           </Link>
         </Text>
       </SafeAreaView>

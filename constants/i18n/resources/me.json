@@ -1,5 +1,6 @@
 {
   "welcome": "Dobrodošli!",
+  "welcome-back": "Dobrodošli nazad!",
   "hello": "Zdravo!",
   "language_switch": "Jezik",
   "profile": {
@@ -7,6 +8,101 @@
     "privacy-policy": "Politika privatnosti",
     "language": "Jezik",
     "notifications": "Obavjestenja",
-    "log-out": "Odjavi se"
+    "log-out": "Odjavi se",
+    "log-out-action": "Odjavićete se sa"
+  },
+  "reminder": {
+    "title": "Podsjetnik",
+    "action": "Dodaj",
+    "fallback": "Nema podsjetnika"
+  },
+  "placeholders": {
+    "email": "Unesite e-mail",
+    "password": "Lozinka",
+    "new-password": "Unesite lozinku",
+    "confirm-password": "Potvrdite lozinku",
+    "not-registered": "Nemate nalog?"
+  },
+  "forgot-password": {
+    "title": "Zaboravili ste lozinku?",
+    "subtitle": "Unesite e-mail adresu povezanu s vašim nalogom i poslaćemo vam e-poruku sa potvrdom za resetovanje lozinke.",
+    "action": "Pošalji kod"
+  },
+  "code-verification": {
+    "title": "Molimo vas provjerite inbox",
+    "subtitle": "Kod je poslat na adresu: ",
+    "timer": "Pošalji ponovo za: ",
+    "resend-success": "Kod uspješno poslat!",
+    "action": "Verifikacija",
+    "secondary-action": "Ponovo pošalji"
+  },
+  "change-password": {
+    "title": "Kreirajte novu lozinku",
+    "action": "Resetuj lozinku",
+    "characters": "Bar 8 znakova",
+    "numbers": "Bar 1 broj",
+    "uppercase": "Bar 1 veliko slovo",
+    "match": "Sifre se poklapaju"
+  },
+  "log-in": {
+    "action": "Prijavite se",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id volutpat quam.",
+    "continue": "Nastavite sa",
+    "register": "Registrujte se"
+  },
+  "start": {
+    "title": "Opustite se i postignite bolji mir uma.",
+    "subtitle": "Opustite se i postignite bolji mir uma.",
+    "action": "Prijavite se kao gost",
+    "account": "Nemate nalog?"
+  },
+  "home": {
+    "title": "Današnja aktivnost",
+    "update": "Posljednje ažuriranje",
+    "focus": "Ocjena fokusa",
+    "stress": "Nivo stresa",
+    "brain": "Moždani talasi",
+    "connection-off": "EEG nije povezan",
+    "connection-on": "EEG je povezan"
+  },
+  "device": {
+    "connected": "Povezan",
+    "connect": "Poveži se",
+    "disconnect": "Odveži se",
+    "update": "Ažuriranje firmvera",
+    "number": "Broj uređaja"
+  },
+  "password-changed": {
+    "title": "Lozinka promijenjena",
+    "message": "Vaša lozinka je uspješno promijenjena",
+    "action": "Nazad na Login"
+  },
+  "security": {
+    "change-password": "Promijenite lozinku",
+    "delete-account": "Obrišite nalog"
+  },
+
+  "privacy-policy": {
+    "title": "Politika Privatnosti",
+    "effective-date": {
+      "title": "Datum Stupanja na Snagu",
+      "text": "Ova Politika Privatnosti važi od 11. januara 2025."
+    },
+    "info-we-collect": {
+      "title": "Informacije Koje Prikupljamo",
+      "text": "Prikupljamo sljedeće vrste informacija:\n\n1. EEG Podaci: Prikupljamo EEG podatke sa vašeg NeuroLens uređaja kako bismo analizirali nivoe fokusa i poboljšali korisničko iskustvo.\n\n2. Lične Informacije: Ovo uključuje vaše ime, email adresu i sve ostale podatke koje nam dostavite prilikom kreiranja naloga ili komunikacije s nama.\n\n3. Podaci o Korišćenju Aplikacije: Prikupljamo anonimnu statistiku o vašim interakcijama sa aplikacijom kako bismo identifikovali trendove i poboljšali funkcionalnost."
+    },
+    "how-we-use": {
+      "title": "Kako Koristimo Vaše Informacije",
+      "text": "Prikupljene informacije koristimo za sljedeće svrhe:\n\n1. EEG Analiza: Kako bismo pružili uvide u vaše nivoe fokusa i generisali personalizovane izvještaje.\n\n2. Poboljšanje Proizvoda: Kako bismo unaprijedili naše algoritme i poboljšali ukupni kvalitet proizvoda i usluga.\n\n3. Korisnička Podrška: Kako bismo odgovorili na vaše upite, riješili probleme i osigurali nesmetano korisničko iskustvo.\n\n4. Komunikacija: Kako bismo vam slali ažuriranja, važne obavijesti i marketinške materijale ako ste se za to prijavili."
+    },
+    "third-party": {
+      "title": "Dijeljenje Sa Trećim Licima",
+      "text": "Vašu privatnost stavljamo na prvo mjesto i ne dijelimo vaše podatke sa trećim licima bez vaše izričite saglasnosti. Izuzeci mogu uključivati pravne zahtjeve, gdje smo obavezni da otkrijemo informacije kako bismo ispunili važeće zakone ili propise."
+    },
+    "contact-us": {
+      "title": "Kontaktirajte Nas",
+      "text": "Ako imate bilo kakva pitanja o ovoj Politici Privatnosti ili o tome kako postupamo s vašim podacima, slobodno nas kontaktirajte:\n\n- Email: support@neurolens.com\n-"
+    }
   }
 }

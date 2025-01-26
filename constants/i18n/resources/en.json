@@ -1,5 +1,6 @@
 {
   "welcome": "Welcome!",
+  "welcome-back": "Welcome back!",
   "hello": "Hello!",
   "language_switch": "Language",
   "profile": {
@@ -7,6 +8,101 @@
     "privacy-policy": "Privacy Policy",
     "language": "Language",
     "notifications": "Notifications",
-    "log-out": "Log out"
+    "log-out": "Log out",
+    "log-out-action": "You'll log out of"
+  },
+  "reminder": {
+    "title": "Reminder",
+    "action": "Add",
+    "fallback": "No reminders"
+  },
+  "placeholders": {
+    "email": "Enter your email",
+    "password": "Password",
+    "new-password": "Unesite lozinku",
+    "confirm-password": "Potvrdite lozinku",
+    "not-registered": "Don't have an account?"
+  },
+  "forgot-password": {
+    "title": "Forgot password?",
+    "subtitle": "Enter the email address with your account and we'll send an email with confirmation to reset your password.",
+    "action": "Send Code"
+  },
+  "code-verification": {
+    "title": "Please check your email",
+    "subtitle": "We have sent the code to: ",
+    "timer": "Send the code again in: ",
+    "resend-success": "Code resent successfully!",
+    "action": "Verification",
+    "secondary-action": "Resend Code"
+  },
+  "change-password": {
+    "title": "Create new password",
+    "action": "Reset password",
+    "characters": "At least 8 characters",
+    "numbers": "At least 1 number",
+    "uppercase": "At least 1 uppercase letter",
+    "match": "Passwords match"
+  },
+  "log-in": {
+    "action": "Log in",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id volutpat quam.",
+    "continue": "Continue with",
+    "register": "Register"
+  },
+  "start": {
+    "title": "Relax and achieve greater peace of mind",
+    "subtitle": "Relax and achieve greater peace of mind",
+    "action": "Start as guest",
+    "account": "Don't have an account?"
+  },
+  "home": {
+    "title": "Today Activity",
+    "update": "Last update",
+    "focus": "Focus Rating",
+    "stress": "Stress Level",
+    "brain": "Brain waves",
+    "connection-off": "No connected EEG",
+    "connection-on": "Connected"
+  },
+  "device": {
+    "connected": "Connected",
+    "connect": "Connect",
+    "disconnect": "Disconnect",
+    "update": "Firmware update",
+    "number": "Device no."
+  },
+  "password-changed": {
+    "title": "Password Changed",
+    "message": "Your password has been changed successfully",
+    "action": "Back to Login"
+  },
+  "security": {
+    "change-password": "Change Password",
+    "delete-account": "Delete Account"
+  },
+
+  "privacy-policy": {
+    "title": "Privacy Policy",
+    "effective-date": {
+      "title": "Effective Date",
+      "text": "This Privacy Policy is effective as of January 11, 2025."
+    },
+    "info-we-collect": {
+      "title": "Information We Collect",
+      "text": "We collect the following types of information:\n\n1. EEG Data: We gather EEG data from your NeuroLens device to help analyze your focus levels and improve user experience.\n\n2. Personal Information: This includes your name, email address, and any other data you provide when creating an account or communicating with us.\n\n3. App Usage Data: We collect anonymized statistics about your interactions with the app to identify trends and improve functionality."
+    },
+    "how-we-use": {
+      "title": "How We Use Your Information",
+      "text": "We use the collected information for the following purposes:\n\n1. EEG Analysis: To provide insights into your focus levels and generate personalized reports.\n\n2. Product Improvement: To refine our algorithms and improve the overall quality of our products and services.\n\n3. Customer Support: To address your inquiries, resolve issues, and ensure a smooth user experience.\n\n4. Communication: To send updates, important notices, and marketing materials if you have opted in."
+    },
+    "third-party": {
+      "title": "Third-Party Sharing",
+      "text": "We prioritize your privacy and do not share your data with third parties without your explicit consent. Exceptions may include legal requirements, where we are obligated to disclose information to comply with applicable laws or regulations."
+    },
+    "contact-us": {
+      "title": "Contact Us",
+      "text": "If you have any questions about this Privacy Policy or how we handle your data, feel free to contact us at:\n\n- Email: support@neurolens.com\n-"
+    }
   }
 }
