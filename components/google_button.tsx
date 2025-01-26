@@ -1,16 +1,23 @@
 import { Image } from "react-native";
 import * as Google from "expo-auth-session/providers/google";
 import React, { useEffect, useState } from "react";
-import { router } from "expo-router";
-import axios from "axios";
 import Button from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useUser } from "@/context/userContext";
 import { useToken } from "@/hooks/useToken";
+import { makeRedirectUri } from "expo-auth-session";
+import axios from "axios";
+
+const redirectUri = makeRedirectUri({
+  native: "com.brainlabs.neurolens://", // Replace with your app's custom scheme
+});
+
 export default function GoogleButton({ className }: { className?: string }) {
-  const [request, response, promptAsync] = Google.useAuthRequest({
+  const [request, response, googlePromptAsync] = Google.useAuthRequest({
     clientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
-    redirectUri: "com.brainlabs.neurolens://",
+    redirectUri: makeRedirectUri({
+      native: "com.brainlabs.neurolens://",
+    }),
   });
   const { setUser } = useUser();
   const { setToken } = useToken();
@@ -34,21 +41,25 @@ export default function GoogleButton({ className }: { className?: string }) {
         type: "auth",
       });
     } catch (err) {
-      console.log(err);
+      console.log("GOOGLE:", err.response);
     } finally {
       setLoading(false);
     }
   }
-
   useEffect(() => {
+    console.log("REQ", request);
+  }, [request]);
+  useEffect(() => {
+    console.log("RESPONSE", response);
     //@ts-ignore
     googleLogin(response?.authentication?.idToken);
   }, [response]);
+
   return (
     <>
       <Button
         loading={loading}
-        onPress={() => promptAsync()}
+        onPress={() => googlePromptAsync()}
         icon={
           <Image
             source={require("@/assets/images/google.png")}

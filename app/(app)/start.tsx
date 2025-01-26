@@ -31,12 +31,12 @@ export default function IndexPage() {
     try {
       await AsyncStorage.setItem("user", JSON.stringify(user));
       setUser(user);
-      router.replace("/(tabs)");
+      router.replace("/(app)/(protected)/(tabs)");
     } catch {}
   }
   useEffect(() => {
     if (user) {
-      router.replace("/(tabs)");
+      router.replace("/(app)/(protected)/(tabs)");
     }
   }, [user]);
   return (
