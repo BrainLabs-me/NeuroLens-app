@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Profile } from "iconsax-react-native";
+import { Profile, Send } from "iconsax-react-native";
 import { ReactNode, useState } from "react";
 import { TextInput, View } from "react-native";
 import { P } from "./text";
@@ -9,9 +9,11 @@ type InputType = {
   label?: string;
   placeholder?: string;
   icon?: ReactNode;
+  value?: string;
   children?: ReactNode;
   className?: string;
   error?: string;
+  endContent?: ReactNode;
 };
 export default function Input(props: InputType) {
   const [focus, setFocus] = useState(false);
@@ -31,6 +33,7 @@ export default function Input(props: InputType) {
       >
         {props.icon}
         <TextInput
+          value={props.value}
           placeholder={props.placeholder}
           style={{
             color: "white",
@@ -46,6 +49,7 @@ export default function Input(props: InputType) {
         >
           {props.children}
         </TextInput>
+        {props.endContent}
       </View>
       {props.error && (
         <P className="text-xs text-left text-red-500">{props.error}</P>

@@ -53,7 +53,7 @@
       ],
       "expo-router",
       [
-        "expo-av",
+        "expo-audio",
         {
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
         }
@@ -68,7 +68,6 @@
         }
       ],
       "expo-secure-store",
-      "expo-audio",
       "expo-localization"
     ],
     "experiments": {

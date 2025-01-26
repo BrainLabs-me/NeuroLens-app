@@ -30,10 +30,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const { token, removeToken } = useToken();
   async function getUser() {
     try {
-      setLoading(true);
-
       if (token) {
-        console.log(token);
         const res = await axios.get(process.env.EXPO_PUBLIC_API_URL + "/user", {
           headers: {
             Authorization: "Bearer " + token,
@@ -45,13 +42,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
           photo: res.data.photo,
           type: "auth",
         });
-        console.log(res);
+        console.log("AAA", res);
+        return 0;
       } else {
         const userr = await AsyncStorage.getItem("user");
         setUser(JSON.parse(userr || ""));
+        return 0;
       }
     } catch (err) {
-      console.log(err);
+      console.log("ERR:", err);
     } finally {
       setLoading(false);
     }
@@ -61,7 +60,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     if (user === null) {
       getUser();
     }
-  }, [token, user]);
+  }, [token]);
 
   const logout = async () => {
     await AsyncStorage.clear();

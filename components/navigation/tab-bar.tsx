@@ -79,7 +79,7 @@ export default function TabBar({
               if (index === 2) {
                 return (
                   <TouchableOpacity
-                    onPress={() => router.push("/assistant")}
+                    onPress={() => router.push("/chat")}
                     key={index}
                     className="bg-primary shadow-gray-50 shadow-sm border-border border rounded-full translate-y-[-47px] p-4"
                   >

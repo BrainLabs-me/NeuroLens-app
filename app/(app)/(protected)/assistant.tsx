@@ -1,23 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { View, PermissionsAndroid, Image } from "react-native";
-import { mediaDevices, RTCPeerConnection } from "react-native-webrtc";
+import {
+  View,
+  PermissionsAndroid,
+  Image,
+  ActivityIndicator,
+} from "react-native";
+// import { RTCPeerConnection, mediaDevices } from "react-native-webrtc";
 import axios from "axios";
 import Button from "@/components/ui/button";
 import {
   ArrowLeft,
   Call,
   Microphone,
+  MicrophoneSlash,
   Setting2,
-  Video,
 } from "iconsax-react-native";
 import { router } from "expo-router";
 import Constants from "expo-constants";
 // import InCallManager from "react-native-incall-manager";
+import { P } from "@/components/ui/text";
+// import { useAudioPlayer } from "expo-audio";
 export default function Page() {
-  // useEffect(() => {
-  //   requestPermissions();
-  // }, []);
-  // const [peer, setPeer] = useState();
+  // const [peer, setPeer] = useState<RTCPeerConnection>();
+  // const [mute, setMute] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(true);
+  // const player = useAudioPlayer(
+  //   require("@/assets/sounds/wind-up-tone-effect-240240.mp3")
+  // );
   // const requestPermissions = async () => {
   //   try {
   //     await PermissionsAndroid.requestMultiple([
@@ -26,53 +35,47 @@ export default function Page() {
   //       PermissionsAndroid.PERMISSIONS.PROCESS_OUTGOING_CALLS,
   //       PermissionsAndroid.PERMISSIONS.CALL_PHONE,
   //     ]);
-  //     InCallManager.start({ media: "audio" });
-  //     //InCallManager.setSpeakerphoneOn(true);
-  //     InCallManager.setForceSpeakerphoneOn(true);
-  //     //  InCallManager.chooseAudioRoute("SPEAKER_PHONE");
   //   } catch (error) {
   //     console.error("Error requesting permissions:", error);
   //   }
   // };
-
-  // const initCall = async () => {
+  // useEffect(() => {
+  //   requestPermissions();
+  // }, []);
+  // async function initCall() {
   //   try {
-  //     // Fetch token
+  //     player.volume = 5;
+  //     player.play();
+
   //     const tokenResponse = await axios.get(
-  //       "https://app.neurolens.me/api/session"
+  //       "https://app.neurolens.me/api/session/me"
   //     );
   //     const EPHEMERAL_KEY = tokenResponse.data.client_secret.value;
-  //     console.log(tokenResponse);
-  //     // Initialize PeerConnection
+
   //     const config = {
   //       iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
   //     };
-  //     const pc = new RTCPeerConnection(config);
-  //     console.log("nova konekcija");
+
+  //     const pc: RTCPeerConnection = new RTCPeerConnection(config);
   //     setPeer(pc);
-  //     // Set remote stream handler
-  //     pc.ontrack = (event) => {
-  //       if (event.streams && event.streams[0]) {
-  //       }
-  //     };
 
   //     const stream = await mediaDevices.getUserMedia({
-  //       audio: {
-  //         deviceId: "SPEAKER_PHONE",
-  //       },
+  //       audio: true,
   //       video: false,
   //     });
-  //     console.log(await mediaDevices.enumerateDevices());
-  //     stream.getTracks().forEach((track) => pc.addTrack(track, stream));
 
-  //     // Setup data channel
-  //     const dc = pc.createDataChannel("oai-events");
-  //     dc.onmessage = (e) => {
+  //     stream.getTracks().forEach((track) => pc.addTrack(track, stream));
+  //     const dc: any = pc.createDataChannel("oai-events");
+  //     dc.onmessage = (e: any) => {
   //       console.log("Data Channel Message:", e.data);
   //     };
-
-  //     // Create offer and start session
-  //     const offer = await pc.createOffer();
+  //     let sessionConstraints = {
+  //       mandatory: {
+  //         OfferToReceiveAudio: true,
+  //         VoiceActivityDetection: true,
+  //       },
+  //     };
+  //     const offer = await pc.createOffer(sessionConstraints);
   //     await pc.setLocalDescription(offer);
 
   //     const baseUrl = "https://api.openai.com/v1/realtime";
@@ -93,15 +96,36 @@ export default function Page() {
   //       sdp: sdpResponse.data,
   //     };
 
+  //     InCallManager.start({ media: "audio" });
+  //     InCallManager.setForceSpeakerphoneOn(true);
+  //     InCallManager.setSpeakerphoneOn(true);
   //     await pc.setRemoteDescription(answer);
   //   } catch (error) {
   //     console.error("Error initializing the call:", error);
+  //   } finally {
+  //     setLoading(false);
+  //     player.pause();
   //   }
-  // };
+  // }
 
+  // function toogle_mute() {
+  //   if (mute) {
+  //     InCallManager.setMicrophoneMute(false);
+  //   } else {
+  //     InCallManager.setMicrophoneMute(true);
+  //   }
+  //   setMute(!mute);
+  // }
   // useEffect(() => {
   //   initCall();
+  //   return () => {
+  //     if (peer) {
+  //       peer.close();
+  //       InCallManager.stop();
+  //     }
+  //   };
   // }, []);
+
   return (
     <View className="h-full bg-background">
       <Image
@@ -126,33 +150,42 @@ export default function Page() {
         </Button>
       </View>
       <View className="flex-1  rounded-b-[3rem] overflow-hidden bg-blue-50">
-        <Image
-          source={require("@/assets/images/assistaint.png")}
-          className="w-full h-full   object-cover"
-        ></Image>
+        {loading ? (
+          <View className="w-full h-full justify-center gap-2 items-center bg-black">
+            <ActivityIndicator size="large" color={"white"}></ActivityIndicator>
+            <P>Calling Aurora...</P>
+          </View>
+        ) : (
+          <Image
+            source={require("@/assets/images/assistaint.png")}
+            className="w-full h-full   object-cover"
+          ></Image>
+        )}
       </View>
-      <View className="h-44  w-full flex-row justify-between p-5 gap-3">
+      <View className=" w-full flex-row justify-between p-5 gap-3">
         <Button
+          onPress={() => console.log(player.isLoaded)}
           type="secondary"
-          className="py-0 p-2 justify-center items-center flex-1 aspect-square"
+          className="py-0 p-2 justify-center items-center w-24 h-24 "
         >
           <Setting2 color="white"></Setting2>
         </Button>
         <Button
+          onPress={() => toogle_mute()}
           type="secondary"
-          className="py-0 p-2 justify-center items-center flex-1 aspect-square"
+          className="py-0 p-2 justify-center items-center w-24 h-24 "
         >
-          <Microphone color="white"></Microphone>
+          {mute ? (
+            <MicrophoneSlash color="white"></MicrophoneSlash>
+          ) : (
+            <Microphone color="white"></Microphone>
+          )}
         </Button>
+
         <Button
+          onPress={() => peer?.close()}
           type="secondary"
-          className="py-0 p-2 justify-center items-center flex-1 aspect-square"
-        >
-          <Video color="white"></Video>
-        </Button>
-        <Button
-          type="secondary"
-          className="py-0 p-2 justify-center bg-red-500 items-center flex-1 aspect-square"
+          className="py-0 flex-1 h-24 p-2 justify-center bg-red-500 items-center "
         >
           <Call color="white"></Call>
         </Button>

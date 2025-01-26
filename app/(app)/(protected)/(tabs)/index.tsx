@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { Image } from "expo-image";
@@ -10,6 +10,7 @@ import BrainIcon from "@/assets/svg/brain";
 import DeviceCard, { NoDeviceCard } from "@/components/device/device_card";
 import Constants from "expo-constants";
 import Header from "@/components/navigation/header";
+import { useAudioPlayer } from "expo-audio";
 
 export default function App() {
   const data = [10, 30, 50, 20, 80, 40, 20, 80, 40, 60];
@@ -24,6 +25,7 @@ export default function App() {
 
   const linePath = lineGenerator(data);
   const [device, setDevice] = useState();
+
   return (
     <>
       <View className="bg-[#00000F] absolute w-full h-full"></View>

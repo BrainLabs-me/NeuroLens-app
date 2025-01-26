@@ -17,6 +17,10 @@ import expo.modules.ApplicationLifecycleDispatcher
 import expo.modules.ReactNativeHostWrapper
 import com.zxcpoiu.incallmanager.InCallManagerPackage
 import android.media.AudioManager;
+import com.oney.WebRTCModule.WebRTCModuleOptions;
+import android.media.AudioAttributes
+import org.webrtc.audio.JavaAudioDeviceModule;
+
 class MainApplication : Application(), ReactApplication {
 
   override val reactNativeHost: ReactNativeHost = ReactNativeHostWrapper(
@@ -49,10 +53,14 @@ class MainApplication : Application(), ReactApplication {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       load()
     }
-    val manager = applicationContext.getSystemService(Context.AUDIO_SERVICE) as? AudioManager
-    manager?.let {
-        it.isSpeakerphoneOn = true
-    }
+    val options = WebRTCModuleOptions.getInstance()
+		val audioAttributes = AudioAttributes.Builder()
+			.setUsage(AudioAttributes.USAGE_MEDIA)
+			.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+			.build()
+		options.audioDeviceModule = JavaAudioDeviceModule.builder(this)
+			.setAudioAttributes(audioAttributes)
+			.createAudioDeviceModule()
     ApplicationLifecycleDispatcher.onApplicationCreate(this)
 
     

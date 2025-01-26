@@ -1,18 +1,14 @@
 import { useUser } from "@/context/userContext";
-import { useToken } from "@/hooks/useToken";
-import { Redirect, Slot, Stack } from "expo-router";
+import { Redirect, Stack } from "expo-router";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { View } from "react-native";
 
 export default function protectedLayout() {
   const { user, loading } = useUser();
-  const { token } = useToken();
   useEffect(() => {
     if (loading === false) {
-      setTimeout(() => {
-        SplashScreen.hide();
-      }, 2000);
+      SplashScreen.hide();
     }
   }, [loading]);
   if (loading) {

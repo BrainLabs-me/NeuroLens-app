@@ -34,7 +34,7 @@ export default function GoogleButton({ className }: { className?: string }) {
         type: "auth",
       });
     } catch (err) {
-      console.log(err);
+      console.log("GOOGLE:", err);
     } finally {
       setLoading(false);
     }
