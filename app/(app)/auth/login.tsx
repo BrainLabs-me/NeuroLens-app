@@ -32,8 +32,8 @@ export default function Page() {
         email: res.data.data.user.email,
         type: "auth",
       });
-
-      // router.replace("/(app)/(protected)/(tabs)");
+      console.log(res.data);
+      router.replace("/(app)/(protected)/(tabs)");
     } catch (err: any) {
       console.log(err.response.data);
       setErros(err.response.data);

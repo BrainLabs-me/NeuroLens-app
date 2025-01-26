@@ -3,25 +3,54 @@ import H1, { P } from "@/components/ui/text";
 import { useToken } from "@/hooks/useToken";
 import axios, { AxiosResponse } from "axios";
 import { Image } from "expo-image";
-import { ArrowLeft, Call, Send } from "iconsax-react-native";
+import {
+  ArrowLeft,
+  AudioSquare,
+  Call,
+  Send,
+  VolumeHigh,
+} from "iconsax-react-native";
 import React from "react";
 import { useRef, useState, useEffect } from "react";
-import { KeyboardAvoidingView, Platform, View, ScrollView } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  View,
+  ScrollView,
+  Alert,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Audio } from "expo-av";
 interface Message {
   role: "user" | "bot";
   content: string;
 }
-
+import { Buffer } from "buffer";
+import { cn } from "@/lib/utils";
+import { useAudioPlayer } from "expo-audio";
+import { Link } from "expo-router";
 export default function Chat() {
   const [input, setInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const scrollViewRef = useRef<ScrollView>(null);
   const { token } = useToken();
+  const player = useAudioPlayer(require("@/assets/sounds/pop-39222.mp3"));
   const [threadId, setThreadId] = useState<string | undefined>(undefined);
-
+  useEffect(() => {
+    const requestAudioPermissions = async () => {
+      const response = await Audio.requestPermissionsAsync();
+      if (!response.granted) {
+        Alert.alert(
+          "Permissions Required",
+          "Please grant audio permissions to use this feature."
+        );
+      }
+    };
+    requestAudioPermissions();
+  }, []);
   // Function to start the chat and get a thread ID
   const start = async (): Promise<void> => {
     try {
@@ -48,6 +77,8 @@ export default function Chat() {
   };
 
   const send = async (): Promise<void> => {
+    console.log(threadId);
+
     if (!input.trim() || !threadId) return;
 
     setMessages((prevMessages) => [
@@ -55,11 +86,10 @@ export default function Chat() {
       { role: "user", content: input },
     ]);
 
-    setInput("");
-
     try {
       console.log(token);
       setLoading(true);
+      setInput("");
 
       const res: AxiosResponse<{ message: string }> = await axios.post(
         `${process.env.EXPO_PUBLIC_API_URL}/send-message`,
@@ -78,6 +108,7 @@ export default function Chat() {
         ...prevMessages,
         { role: "bot", content: res.data.message },
       ]);
+      player.play();
     } catch (err: any) {
       if (err.response && err.response.data) {
         console.log(err.response.data);
@@ -102,40 +133,43 @@ export default function Chat() {
   const [inputText, setInputText] = useState(
     "The quick brown fox jumped over the lazy dog."
   );
-  const [voice, setVoice] = useState("alloy");
   const [sound, setSound] = useState(null);
-
-  const playStreamedAudio = async () => {
+  const [audio_loading, setAudioLoading] = useState();
+  const playStreamedAudio = async (message: string, index: number) => {
     try {
-      // Fetch the audio stream from your API
-      const response = await fetch(process.env.EXPO_API_URL + "/audio", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          input: "Hello how are you today",
-        }),
-      });
+      setAudioLoading(index);
+      console.log("a");
+      const response = await axios.post(
+        `https://app.neurolens.me/api/audio`,
+        { input: message },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          responseType: "arraybuffer",
+        }
+      );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch audio stream");
-      }
+      // Convert arraybuffer to base64
+      const base64Audio = Buffer.from(response.data, "binary").toString(
+        "base64"
+      );
+      console.log(base64Audio);
 
-      // Get the response as a blob
-      const blob = await response.blob();
-
-      // Convert blob to a local URI
-      const uri = URL.createObjectURL(blob);
+      // Create a data URI for the audio
+      const audioURI = `data:audio/mp3;base64,${base64Audio}`;
 
       // Load and play the sound
       const { sound } = await Audio.Sound.createAsync(
-        { uri },
+        { uri: audioURI },
         { shouldPlay: true }
       );
       setSound(sound);
     } catch (error) {
       console.error("Error playing audio:", error);
+      Alert.alert("Error", "Failed to play audio. Please try again.");
+    } finally {
+      setAudioLoading(false);
     }
   };
 
@@ -168,7 +202,9 @@ export default function Chat() {
         <View className="flex px-3 pb-3 flex-row items-center justify-between gap-5 border-b border-border">
           <ArrowLeft color="white" />
           <P className="text-3xl text-white">Aurora</P>
-          <Call className="opacity-0" color="white" />
+          <Link href="/(app)/(protected)/assistant">
+            <Call className="opacity-0" color="white" />
+          </Link>
         </View>
 
         {/* Messages list with scroll */}
@@ -179,25 +215,44 @@ export default function Chat() {
           contentContainerStyle={{ paddingBottom: 80 }}
         >
           {messages.map((message, index) => (
-            <View
-              key={index}
-              className={`ml-3 gap-1  ${
-                message.role === "user"
-                  ? "self-end bg-primary test-right"
-                  : "self-start bg-card "
-              } border border-border p-3 w-fit h-fit rounded-2xl ${
-                message.role === "user" ? "rounded-tr-none" : "rounded-tl-none"
-              }`}
-            >
-              <P
-                className={`${
+            <View key={index} className="ml-3 w-fit gap-1">
+              <View
+                key={index}
+                className={` gap-1  ${
                   message.role === "user"
-                    ? "text-white  text-left"
-                    : "text-left"
+                    ? "self-end bg-primary test-right"
+                    : "self-start bg-card "
+                } border border-border p-3 w-fit h-fit rounded-2xl ${
+                  message.role === "user"
+                    ? "rounded-tr-none"
+                    : "rounded-tl-none"
                 }`}
               >
-                {message.content}
-              </P>
+                <P
+                  className={`${
+                    message.role === "user"
+                      ? "text-white  text-lg text-left"
+                      : "text-left text-lg"
+                  }`}
+                >
+                  {message.content}
+                </P>
+              </View>
+              {message.role === "bot" && (
+                <TouchableOpacity
+                  className="text-end flex justify-start items-start"
+                  onPress={() => playStreamedAudio(message.content, index)}
+                >
+                  {audio_loading === index ? (
+                    <ActivityIndicator
+                      color={"white"}
+                      size={"small"}
+                    ></ActivityIndicator>
+                  ) : (
+                    <VolumeHigh size="22" color="white" />
+                  )}
+                </TouchableOpacity>
+              )}
             </View>
           ))}
           {loading && (
@@ -221,12 +276,19 @@ export default function Chat() {
                 onSubmitEditing={send}
                 blurOnSubmit={false}
                 endContent={
-                  <View
-                    className="bg-primary rounded-full flex justify-center items-center p-3"
-                    onTouchEnd={send}
+                  <TouchableOpacity
+                    disabled={!input ? true : false}
+                    className={cn(
+                      "bg-primary rounded-full flex justify-center items-center p-3",
+                      !input && "bg-[#9075FF]"
+                    )}
+                    onPress={() => send()}
                   >
-                    <Send color="white" variant="Bold" />
-                  </View>
+                    <Send
+                      color={!input ? "rgba(255,255,255,0.7)" : "white"}
+                      variant="Bold"
+                    />
+                  </TouchableOpacity>
                 }
                 placeholder="Message"
               />

@@ -5,7 +5,7 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
-// import { RTCPeerConnection, mediaDevices } from "react-native-webrtc";
+import { RTCPeerConnection, mediaDevices } from "react-native-webrtc";
 import axios from "axios";
 import Button from "@/components/ui/button";
 import {
@@ -17,114 +17,114 @@ import {
 } from "iconsax-react-native";
 import { router } from "expo-router";
 import Constants from "expo-constants";
-// import InCallManager from "react-native-incall-manager";
+import InCallManager from "react-native-incall-manager";
 import { P } from "@/components/ui/text";
-// import { useAudioPlayer } from "expo-audio";
+import { useAudioPlayer } from "expo-audio";
 export default function Page() {
-  // const [peer, setPeer] = useState<RTCPeerConnection>();
-  // const [mute, setMute] = useState<boolean>(false);
-  // const [loading, setLoading] = useState<boolean>(true);
-  // const player = useAudioPlayer(
-  //   require("@/assets/sounds/wind-up-tone-effect-240240.mp3")
-  // );
-  // const requestPermissions = async () => {
-  //   try {
-  //     await PermissionsAndroid.requestMultiple([
-  //       PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
-  //       PermissionsAndroid.PERMISSIONS.CAMERA,
-  //       PermissionsAndroid.PERMISSIONS.PROCESS_OUTGOING_CALLS,
-  //       PermissionsAndroid.PERMISSIONS.CALL_PHONE,
-  //     ]);
-  //   } catch (error) {
-  //     console.error("Error requesting permissions:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   requestPermissions();
-  // }, []);
-  // async function initCall() {
-  //   try {
-  //     player.volume = 5;
-  //     player.play();
+  const [peer, setPeer] = useState<RTCPeerConnection>();
+  const [mute, setMute] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const player = useAudioPlayer(
+    require("@/assets/sounds/wind-up-tone-effect-240240.mp3")
+  );
+  const requestPermissions = async () => {
+    try {
+      await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        PermissionsAndroid.PERMISSIONS.PROCESS_OUTGOING_CALLS,
+        PermissionsAndroid.PERMISSIONS.CALL_PHONE,
+      ]);
+    } catch (error) {
+      console.error("Error requesting permissions:", error);
+    }
+  };
+  useEffect(() => {
+    requestPermissions();
+  }, []);
+  async function initCall() {
+    try {
+      player.volume = 5;
+      player.play();
 
-  //     const tokenResponse = await axios.get(
-  //       "https://app.neurolens.me/api/session/me"
-  //     );
-  //     const EPHEMERAL_KEY = tokenResponse.data.client_secret.value;
+      const tokenResponse = await axios.get(
+        "https://app.neurolens.me/api/session/me"
+      );
+      const EPHEMERAL_KEY = tokenResponse.data.client_secret.value;
 
-  //     const config = {
-  //       iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
-  //     };
+      const config = {
+        iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+      };
 
-  //     const pc: RTCPeerConnection = new RTCPeerConnection(config);
-  //     setPeer(pc);
+      const pc: RTCPeerConnection = new RTCPeerConnection(config);
+      setPeer(pc);
 
-  //     const stream = await mediaDevices.getUserMedia({
-  //       audio: true,
-  //       video: false,
-  //     });
+      const stream = await mediaDevices.getUserMedia({
+        audio: true,
+        video: false,
+      });
 
-  //     stream.getTracks().forEach((track) => pc.addTrack(track, stream));
-  //     const dc: any = pc.createDataChannel("oai-events");
-  //     dc.onmessage = (e: any) => {
-  //       console.log("Data Channel Message:", e.data);
-  //     };
-  //     let sessionConstraints = {
-  //       mandatory: {
-  //         OfferToReceiveAudio: true,
-  //         VoiceActivityDetection: true,
-  //       },
-  //     };
-  //     const offer = await pc.createOffer(sessionConstraints);
-  //     await pc.setLocalDescription(offer);
+      stream.getTracks().forEach((track) => pc.addTrack(track, stream));
+      const dc: any = pc.createDataChannel("oai-events");
+      dc.onmessage = (e: any) => {
+        console.log("Data Channel Message:", e.data);
+      };
+      let sessionConstraints = {
+        mandatory: {
+          OfferToReceiveAudio: true,
+          VoiceActivityDetection: true,
+        },
+      };
+      const offer = await pc.createOffer(sessionConstraints);
+      await pc.setLocalDescription(offer);
 
-  //     const baseUrl = "https://api.openai.com/v1/realtime";
-  //     const model = "gpt-4o-realtime-preview-2024-12-17";
-  //     const sdpResponse = await axios.post(
-  //       `${baseUrl}?model=${model}`,
-  //       offer.sdp,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${EPHEMERAL_KEY}`,
-  //           "Content-Type": "application/sdp",
-  //         },
-  //       }
-  //     );
+      const baseUrl = "https://api.openai.com/v1/realtime";
+      const model = "gpt-4o-realtime-preview-2024-12-17";
+      const sdpResponse = await axios.post(
+        `${baseUrl}?model=${model}`,
+        offer.sdp,
+        {
+          headers: {
+            Authorization: `Bearer ${EPHEMERAL_KEY}`,
+            "Content-Type": "application/sdp",
+          },
+        }
+      );
 
-  //     const answer = {
-  //       type: "answer",
-  //       sdp: sdpResponse.data,
-  //     };
+      const answer = {
+        type: "answer",
+        sdp: sdpResponse.data,
+      };
 
-  //     InCallManager.start({ media: "audio" });
-  //     InCallManager.setForceSpeakerphoneOn(true);
-  //     InCallManager.setSpeakerphoneOn(true);
-  //     await pc.setRemoteDescription(answer);
-  //   } catch (error) {
-  //     console.error("Error initializing the call:", error);
-  //   } finally {
-  //     setLoading(false);
-  //     player.pause();
-  //   }
-  // }
+      InCallManager.start({ media: "audio" });
+      InCallManager.setForceSpeakerphoneOn(true);
+      InCallManager.setSpeakerphoneOn(true);
+      await pc.setRemoteDescription(answer);
+    } catch (error) {
+      console.error("Error initializing the call:", error);
+    } finally {
+      setLoading(false);
+      player.pause();
+    }
+  }
 
-  // function toogle_mute() {
-  //   if (mute) {
-  //     InCallManager.setMicrophoneMute(false);
-  //   } else {
-  //     InCallManager.setMicrophoneMute(true);
-  //   }
-  //   setMute(!mute);
-  // }
-  // useEffect(() => {
-  //   initCall();
-  //   return () => {
-  //     if (peer) {
-  //       peer.close();
-  //       InCallManager.stop();
-  //     }
-  //   };
-  // }, []);
+  function toogle_mute() {
+    if (mute) {
+      InCallManager.setMicrophoneMute(false);
+    } else {
+      InCallManager.setMicrophoneMute(true);
+    }
+    setMute(!mute);
+  }
+  useEffect(() => {
+    initCall();
+    return () => {
+      if (peer) {
+        peer.close();
+        InCallManager.stop();
+      }
+    };
+  }, []);
 
   return (
     <View className="h-full bg-background">

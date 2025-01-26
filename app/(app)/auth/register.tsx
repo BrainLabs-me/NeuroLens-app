@@ -10,7 +10,7 @@ import GoogleButton from "@/components/google_button";
 import axios from "axios";
 import { useToken } from "@/hooks/useToken";
 import { useUser } from "@/context/userContext";
-
+import { router } from "expo-router";
 export default function Page() {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -37,6 +37,7 @@ export default function Page() {
         email: res.data.data.user.email,
         type: "auth",
       });
+      router.push("/(app)/(protected)/(tabs)");
     } catch (err: any) {
       console.log(err.response.data);
       setErros(err.response.data);
